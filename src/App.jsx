@@ -1,5 +1,6 @@
 import './App.css'
 import CardContainer from './components/CardContainer';
+import NewCardFormComponent from './components/NewCardForm';
 
 const VITE_APP_BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
 
@@ -34,10 +35,13 @@ const CARD_TEST_DATA = [
 
 function App() {
   return (
-    <>
-      <h1>It&apos;s a mood</h1>
+    <main>
+      <header>
+        <h1>It&apos;s a mood</h1>
+      </header>
       <CardContainer cardData={CARD_TEST_DATA} />
-    </>
+      <NewCardFormComponent />
+    </main>
   )
 }
 

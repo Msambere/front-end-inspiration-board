@@ -1,5 +1,18 @@
 *{
   box-sizing: 0;
   margin: 0;
-  border: 1px dotted black;
+  /* border: 1px dotted black; */
 }
+
+main{
+  width: 95%;
+  height: 95%;
+  border: 2px solid sandybrown;
+  border-radius: 8px;
+
+
+  display: grid;
+  grid-template-rows: 15% 1fr;
+
+}
+
