@@ -1,12 +1,13 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-const NewCardFormComponent =() => {
+const NewCardFormComponent =({createNewCard, currentBoard}) => {
     const [cardText, setCardText] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(`Submit ${cardText}`);
+        createNewCard(currentBoard, {text: cardText});
         setCardText('');
     }
 
@@ -29,8 +30,9 @@ const NewCardFormComponent =() => {
     )
 };
 
-// NewCardFormComponent.propTypes = {
-//     submissionHandler: PropTypes.func.isRequired,
-// };
+NewCardFormComponent.propTypes = {
+    createNewCard: PropTypes.func.isRequired,
+    currentBoard: PropTypes.number.isRequired,
+};
 
 export default NewCardFormComponent;
