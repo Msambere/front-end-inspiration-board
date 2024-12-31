@@ -1,0 +1,10 @@
+dialog {
+  width: 33vw;
+  height: 33vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 16px;
+
+}

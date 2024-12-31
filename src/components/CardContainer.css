@@ -8,3 +8,8 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
 }
+
+button {
+  width: 30px;
+  height: 30px;
+}
