@@ -17,7 +17,7 @@ const CardContainer = ({cardData}) => {
     return(
         <section className="cardContainer">
             {cards}
-            <button onClick={openNewCardForm} className="addCardButton">+</button>
+            <button onClick={openNewCardForm} className="addCardButton">+New Card</button>
         </section>
     )
 
