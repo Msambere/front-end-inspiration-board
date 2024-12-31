@@ -11,7 +11,7 @@ const CardContainer = ({cardData}) => {
 
     return(
         <section className="cardContainer">
-            {cards}
+            {...cards}
         </section>
     )
 
