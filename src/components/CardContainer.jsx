@@ -9,9 +9,15 @@ const CardContainer = ({cardData}) => {
         )
     });
 
+    const openNewCardForm = () => {
+        const newCardForm = document.getElementById('newCardForm');
+        newCardForm.showModal();
+    };
+
     return(
         <section className="cardContainer">
-            {...cards}
+            {cards}
+            <button onClick={openNewCardForm} className="addCardButton">+New Card</button>
         </section>
     )
 

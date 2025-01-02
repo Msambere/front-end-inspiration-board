@@ -8,3 +8,11 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
 }
+
+.addCardButton {
+  background-color: palevioletred;
+  border-color: palevioletred;
+  border-radius: 8px;
+  width: 100px;
+  height: 100px;
+}

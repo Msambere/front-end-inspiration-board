@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
 *{
-  box-sizing: 0;
+  box-sizing: border-box;
   margin: 0;
   /* border: 1px dotted black; */
 }
@@ -16,3 +18,9 @@ main{
 
 }
 
+h1{
+  font-family: 'Sour Gummy', cursive;
+  font-size: 3rem;
+  margin-top: 1rem;
+  margin-left: 1rem;
+}

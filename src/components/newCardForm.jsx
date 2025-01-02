@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import './NewCardForm.css';
 
 const NewCardFormComponent =({createNewCard, currentBoard}) => {
     const [cardText, setCardText] = useState('');
@@ -9,10 +10,12 @@ const NewCardFormComponent =({createNewCard, currentBoard}) => {
         console.log(`Submit ${cardText}`);
         createNewCard(currentBoard, {text: cardText});
         setCardText('');
+        const newCardForm = document.getElementById("newCardForm");
+        newCardForm.close();
     }
 
     return(
-        <section className="cardForm">
+        <dialog id="newCardForm" className="newCardForm">
             <h2>Create a new card</h2>
             <form className='' onSubmit={handleSubmit}>
                 <input
@@ -26,7 +29,7 @@ const NewCardFormComponent =({createNewCard, currentBoard}) => {
                     <input type="submit" name="Create new card"/>
                 </div>
             </form>
-        </section>
+        </dialog>
     )
 };
 
