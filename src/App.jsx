@@ -35,6 +35,7 @@ const newCardAPICall = (board_id, newCardData) =>{
 function App() {
   const [boardData, setBoardData] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState(4);
+  const [view, setView] = useState('board');
 
   const retrieveBoardData = () => {
     return boardDataAPICall()
@@ -80,10 +81,12 @@ function App() {
       <header>
         <h1>It&apos;s A Mood</h1>
       </header>
+      {/* if the view = 'cards then render everthing below */}
       <CardContainer cardData={getCards(boardData)} />
       <NewCardFormComponent createNewCard={createNewCard} currentBoard={selectedBoard} />
+      
+      {/* if the view = 'board' render everything below */}
         <SideBar boards={boardData} selectBoardAction={setSelectedBoard}></SideBar>
-        <BoardContainer boards={boardData}></BoardContainer>
     </main>
   )
 }
