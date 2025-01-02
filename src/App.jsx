@@ -1,10 +1,12 @@
 import './App.css'
-import CardContainer from './components/CardContainer';
-import NewCardFormComponent from './components/NewCardForm';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Board from "./components/Board.jsx";
+
+import CardContainer from './components/CardContainer';
+import NewCardForm from './components/NewCardForm';
 import SideBar from "./components/SideBar.jsx";
+import Board from "./components/Board.jsx";
+import NewBoardForm from './components/NewBoardForm.jsx';
 
 const VITE_APP_BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
 
@@ -29,6 +31,16 @@ const newCardAPICall = (board_id, newCardData) =>{
         })
 };
 
+const newBoardAPICall = (newBoardData) =>{
+  return axios.post(`${VITE_APP_BACKEND_URL}/boards`, newBoardData)
+        .then((response) => {
+          console.log('API Response:', response.data.board);
+          return response.data.board;
+        })
+        .catch((error) => {
+          console.error('Error:', error)
+        })
+};
 
 
 function App() {
@@ -73,7 +85,12 @@ function App() {
       });
     };
 
-    console.log(selectedBoard)
+  const createNewBoard = (newBoardData) => {
+    return newBoardAPICall(newBoardData)
+    .then((data) => {
+      retrieveBoardData();
+    });
+  }
 
   return (
     <main>
@@ -82,10 +99,12 @@ function App() {
       </header>
       {/* if the view = 'cards then render everthing below */}
       <CardContainer cardData={getCards(boardData)} />
-      <NewCardFormComponent createNewCard={createNewCard} currentBoard={selectedBoard} />
+      <NewCardForm createNewCard={createNewCard} currentBoard={selectedBoard} />
       
       {/* if the view = 'board' render everything below */}
         <SideBar boards={boardData} selectBoardAction={setSelectedBoard}></SideBar>
+        <NewBoardForm createNewBoard={createNewBoard}/>
+
     </main>
   )
 }

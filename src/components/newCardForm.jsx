@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import './NewCardForm.css';
 
-const NewCardFormComponent =({createNewCard, currentBoard}) => {
+const NewCardForm =({createNewCard, currentBoard}) => {
     const [cardText, setCardText] = useState('');
 
     const handleSubmit = (event) => {
@@ -21,7 +21,7 @@ const NewCardFormComponent =({createNewCard, currentBoard}) => {
                 <input
                 type="text"
                 name='card-text'
-                placeholder='Add an inspiring message'
+                placeholder='Write your card text here'
                 value={cardText}
                 onChange={(event) => setCardText(event.target.value)}
                 />
@@ -33,9 +33,9 @@ const NewCardFormComponent =({createNewCard, currentBoard}) => {
     )
 };
 
-NewCardFormComponent.propTypes = {
+NewCardForm.propTypes = {
     createNewCard: PropTypes.func.isRequired,
     currentBoard: PropTypes.number.isRequired,
 };
 
-export default NewCardFormComponent;
+export default NewCardForm;

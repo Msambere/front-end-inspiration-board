@@ -3,14 +3,14 @@ import { useState } from 'react';
 import './NewBoardForm.css';
 
 const NewBoardForm =({createNewBoard}) => {
-    const [boardName, setBoardName] = useState('');
+    const [boardTitle, setBoardTitle] = useState('');
     const [boardOwner, setBoardOwner] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(`Submit ${boardName}, by ${boardOwner}`);
-        createNewBoard({name: boardName, owner: boardOwner});
-        setBoardName('');
+        console.log(`Submit ${boardTitle}, by ${boardOwner}`);
+        createNewBoard({title: boardTitle, owner: boardOwner});
+        setBoardTitle('');
         setBoardOwner('');
         const newBoardForm = document.getElementById("newBoardForm");
         newBoardForm.close();
@@ -24,8 +24,8 @@ const NewBoardForm =({createNewBoard}) => {
                 type="text"
                 name='board-name'
                 placeholder='Name the board'
-                value={boardName}
-                onChange={(event) => setBoardName(event.target.value)}
+                value={boardTitle}
+                onChange={(event) => setBoardTitle(event.target.value)}
                 />
                 <input
                 type='text'
