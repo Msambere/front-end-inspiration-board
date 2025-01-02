@@ -76,7 +76,7 @@ function App() {
   return (
     <main>
       <header>
-        <h1>It&apos;s a mood</h1>
+        <h1>It&apos;s A Mood</h1>
       </header>
       <CardContainer cardData={getCards(boardData)} />
       <NewCardFormComponent createNewCard={createNewCard} currentBoard={selectedBoard} />

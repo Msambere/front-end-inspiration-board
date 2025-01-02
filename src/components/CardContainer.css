@@ -9,7 +9,10 @@
   grid-template-rows: auto;
 }
 
-button {
-  width: fit-content;
-  height: 30px;
+.addCardButton {
+  background-color: palevioletred;
+  border-color: palevioletred;
+  border-radius: 8px;
+  width: 100px;
+  height: 100px;
 }
