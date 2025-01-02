@@ -3,6 +3,9 @@ import CardContainer from './components/CardContainer';
 import NewCardFormComponent from './components/NewCardForm';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Board from "./components/Board.jsx";
+import BoardContainer from "./components/BoardContainer.jsx";
+import SideBar from "./components/SideBar.jsx";
 
 const VITE_APP_BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
 
@@ -32,8 +35,7 @@ const newCardAPICall = (board_id, newCardData) =>{
 function App() {
   const [boardData, setBoardData] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState(4);
-  
-  
+
   const retrieveBoardData = () => {
     return boardDataAPICall()
     .then((data) => {
@@ -41,7 +43,7 @@ function App() {
       return data.boards;
     });
   };
-  
+
   const getCards = (allBoardData) =>{
     const cards = [];
     for (const board of allBoardData){
@@ -80,6 +82,8 @@ function App() {
       </header>
       <CardContainer cardData={getCards(boardData)} />
       <NewCardFormComponent createNewCard={createNewCard} currentBoard={selectedBoard} />
+        <SideBar boards={boardData} selectBoardAction={setSelectedBoard}></SideBar>
+        <BoardContainer boards={boardData}></BoardContainer>
     </main>
   )
 }
