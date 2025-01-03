@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
 
 *{
   box-sizing: border-box;
@@ -11,11 +10,8 @@ main{
   height: 95%;
   border: 2px solid sandybrown;
   border-radius: 8px;
-
-
   display: grid;
   grid-template-rows: 15% 1fr;
-
 }
 
 h1{
