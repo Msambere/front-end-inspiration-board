@@ -5,7 +5,7 @@ const SideBar = ({boards, selectBoardAction}) => {
         return( <button 
             key={board.id}
             className="board-sidebar-button" 
-            onClick={() =>selectBoardAction(board.id)} // This is calling selectBoard right away need to change it to a handler
+            onClick={() =>selectBoardAction(board.id)} // Changed to anonymous function so it isn't called immediately
     > 
         {board.title}
     </button>
