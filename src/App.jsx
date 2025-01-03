@@ -1,93 +1,38 @@
 import './App.css'
-import CardContainer from './components/CardContainer';
-import NewCardFormComponent from './components/NewCardForm';
-import axios from 'axios';
+import InspirationBoard from "./components/InspirationBoard.jsx";
+import {AppBar, Container, Toolbar, Typography} from "@mui/material";
+import {boardDataAPICall} from "./api/api.js";
+<a href=""></a>
 import { useEffect, useState } from 'react';
-import Board from "./components/Board.jsx";
-import BoardContainer from "./components/BoardContainer.jsx";
-import SideBar from "./components/SideBar.jsx";
-
-const VITE_APP_BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
-
-const boardDataAPICall = () =>{
-  return axios.get(`${VITE_APP_BACKEND_URL}/boards`)
-        .then((response) => {
-          return response.data.boards;
-        })
-        .catch((error) => {
-          console.error('Error:', error)
-        })
-}
-
-const newCardAPICall = (board_id, newCardData) =>{
-  return axios.post(`${VITE_APP_BACKEND_URL}/boards/${board_id}/cards`, newCardData)
-        .then((response) => {
-          console.log('API Response:', response.data.card);
-          return response.data.card;
-        })
-        .catch((error) => {
-          console.error('Error:', error)
-        })
-};
-
-
 
 function App() {
-  const [boardData, setBoardData] = useState([]);
-  const [selectedBoard, setSelectedBoard] = useState(4);
-  const [view, setView] = useState('board');
+    const [boards, setBoards] = useState([]);
+    const [selectedBoardId, setSelectedBoardId] = useState(-1);
 
-  const retrieveBoardData = () => {
-    return boardDataAPICall()
-    .then((data) => {
-      setBoardData(data);
-      return data.boards;
-    });
-  };
+    // Fetch all boards on component mount
+    useEffect(() => {
+        boardDataAPICall().then((boards) => {setBoards(boards)});
+    }, []);
 
-  const getCards = (allBoardData) =>{
-    const cards = [];
-    for (const board of allBoardData){
-      if(board.id === selectedBoard){
-        for (const card of board.cards){
-          cards.push(card);
-        }
-      }
+    // Handler for when user selects a board from the sidebar
+    const handleSelectBoard = (boardId) => {
+        setSelectedBoardId(boardId);
     };
-    return cards
-  };
-  
-  useEffect(() => {
-    retrieveBoardData()
-  },[]);
-
-  const createNewCard =(board_id, newCardData) =>{
-    return newCardAPICall(board_id, newCardData)
-    .then((data) => {
-      retrieveBoardData();
-      // setBoardData(boards =>boards.map((board) => {
-      //   if(board.id === board_id){
-      //     return {...board, cards: [...board.cards, data]}
-      //   }else {
-      //     return board;
-      //   }
-      });
-    };
-
-
-
   return (
-    <main>
-      <header>
-        <h1>It&apos;s A Mood</h1>
-      </header>
-      {/* if the view = 'cards then render everthing below */}
-      <CardContainer cardData={getCards(boardData)} />
-      <NewCardFormComponent createNewCard={createNewCard} currentBoard={selectedBoard} />
-      
-      {/* if the view = 'board' render everything below */}
-        <SideBar boards={boardData} selectBoardAction={setSelectedBoard}></SideBar>
-    </main>
+      <>
+          <AppBar position="static">
+              <Toolbar>
+                  <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                      Inspiration Board
+                  </Typography>
+              </Toolbar>
+          </AppBar>
+          <Container maxWidth="xl" spacing={2}>
+              <InspirationBoard boards={boards} setBoards={setBoards} handleSelectBoard={handleSelectBoard}/>
+              {/* <Board/> */}
+          </Container>
+      </>
+
   )
 }
 
