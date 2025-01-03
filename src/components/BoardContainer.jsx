@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import NewBoardForm from "./NewBoardForm.jsx";
-import {getAllBoards, newBoardAPICall} from "../api/api.js";
+import {boardDataAPICall, newBoardAPICall} from "../api/api.js";
 import Grid from "@mui/material/Grid2";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -98,7 +98,7 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
             {/* New Board Form */}
             <NewBoardForm
                 createNewBoard={(data)=> {
-                    newBoardAPICall(data).then(() => {getAllBoards().then(allBoards => {setBoards(allBoards)})});
+                    newBoardAPICall(data).then(() => {boardDataAPICall().then(allBoards => {setBoards(allBoards)})});
                 }}
                 isOpen={openCreateBoard}
                 onClose={() => setOpenCreateBoard(false)}
