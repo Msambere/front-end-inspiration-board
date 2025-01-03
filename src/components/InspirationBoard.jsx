@@ -1,24 +1,8 @@
-import { useState, useEffect } from "react";
 import "./InspirationBoard.css";
 import BoardContainer from "./BoardContainer.jsx";
-import Board from "./Board";
-import {getAllBoards} from "../api/api.js";
 import {Container} from "@mui/material";
 
-const InspirationBoard = () => {
-    const [boards, setBoards] = useState([]);
-    const [selectedBoardId, setSelectedBoardId] = useState(-1);
-
-    // Fetch all boards on component mount
-    useEffect(() => {
-        getAllBoards().then((boards) => {setBoards(boards)});
-    }, []);
-
-    // Handler for when user selects a board from the sidebar
-    const handleSelectBoard = (boardId) => {
-        setSelectedBoardId(boardId);
-    };
-
+const InspirationBoard = ({boards, setBoards, handleSelectBoard}) => {
 
     return (
         <Container sx={{ mt: 2, backgroundColor: "#D4D1D1" }} >
@@ -27,7 +11,7 @@ const InspirationBoard = () => {
                     onSelectBoard={handleSelectBoard}
                     setBoards={setBoards}
                 />
-                {selectedBoardId !== -1 && <Board boardId={selectedBoardId} />}
+                {/* {selectedBoardId !== -1 && <Board boardId={selectedBoardId} />} */}
             </Container>
     );
 };
