@@ -2,12 +2,12 @@ import './App.css'
 import InspirationBoard from "./components/InspirationBoard.jsx";
 import {AppBar, Container, Toolbar, Typography} from "@mui/material";
 import {boardDataAPICall} from "./api/api.js";
-<a href=""></a>
 import { useEffect, useState } from 'react';
+import Board from './components/Board.jsx'
 
 function App() {
     const [boards, setBoards] = useState([]);
-    const [selectedBoardId, setSelectedBoardId] = useState(-1);
+    const [selectedBoardId, setSelectedBoardId] = useState(null);
 
     // Fetch all boards on component mount
     useEffect(() => {
@@ -18,6 +18,7 @@ function App() {
     const handleSelectBoard = (boardId) => {
         setSelectedBoardId(boardId);
     };
+
   return (
       <>
           <AppBar position="static">
@@ -28,9 +29,16 @@ function App() {
               </Toolbar>
           </AppBar>
           <Container maxWidth="xl" spacing={2}>
-              <InspirationBoard boards={boards} setBoards={setBoards} handleSelectBoard={handleSelectBoard}/>
-              {/* <Board/> */}
-          </Container>
+                {selectedBoardId !== null ? (
+                    <Board boardId={selectedBoardId} />
+                ) : (
+                    <InspirationBoard
+                        boards={boards}
+                        setBoards={setBoards}
+                        handleSelectBoard={handleSelectBoard}
+                    />
+                )}
+            </Container>
       </>
 
   )

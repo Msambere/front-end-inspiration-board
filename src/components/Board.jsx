@@ -32,8 +32,9 @@ const Board = ({ boardId }) => {
     </>
   );
 };
+
 Board.propTypes = {
-  boardId: PropTypes.number.isRequired,
+  boardId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 export default Board;

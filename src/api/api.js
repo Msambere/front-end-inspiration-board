@@ -15,10 +15,14 @@ export const newBoardAPICall = (newBoardData) => {
 };
 
 export const singleBoardAPICall = (boardId) => {
+  if (!boardId) {
+    console.error("Invalid boardId provided:", boardId);
+  }
+  
   return axios
     .get(`${VITE_APP_BACKEND_URL}/boards/${boardId}`)
     .then((response) => {
-      return response.data.board;
+      return response.data;
     })
     .catch((error) => {
       console.error("Error fetching board:", error);
