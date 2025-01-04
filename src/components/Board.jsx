@@ -5,7 +5,8 @@ import NewCardForm from "./newCardForm.jsx";
 import CardContainer from "./CardContainer.jsx";
 
 const Board = ({ boardId }) => {
-  const [board, setBoard] = useState(null); // holding current cards
+  const [board, setBoard] = useState(null);
+  const [newCardSubmitStatus, setNewCardSubmitStatus] = useState(null);
 
   useEffect(() => {
     singleBoardAPICall(boardId).then((newBoard) => {
@@ -21,6 +22,11 @@ const Board = ({ boardId }) => {
     });
   };
 
+  const closeSubmitStatusDialog = () => {
+    document.getElementById('cardSubmitStatus').close();
+    setNewCardSubmitStatus(null);
+  };
+
   if (!board) {
     return <div>Loading board...</div>;
   }
@@ -28,7 +34,11 @@ const Board = ({ boardId }) => {
   return (
     <>
       <CardContainer cardData={board.cards} />
-      <NewCardForm createNewCard={createNewCard} currentBoard={boardId} />
+      <NewCardForm createNewCard={createNewCard} currentBoard={boardId} setSubmitStatus={setNewCardSubmitStatus}/>
+      <dialog id="cardSubmitStatus">
+        {newCardSubmitStatus}
+        <button onClick={closeSubmitStatusDialog}>Close</button>
+      </dialog>
     </>
   );
 };
