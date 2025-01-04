@@ -1,6 +1,8 @@
 import Card from "./Card";
 import './CardContainer.css';
 import PropTypes from 'prop-types';
+import { Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 const CardContainer = ({cardData}) => {
     const cards = cardData.map((card) => {
@@ -14,11 +16,24 @@ const CardContainer = ({cardData}) => {
         newCardForm.showModal();
     };
 
-    return(
+    return (
+      <>
+
         <section className="cardContainer">
             {cards}
-            <button onClick={openNewCardForm} className="addCardButton">+New Card</button>
+            <Button
+              variant="contained"
+              endIcon={<AddIcon />}
+              onClick={openNewCardForm}
+              sx={{
+                  backgroundColor: "#a389d4",
+                  color: "#ffffff",
+                  "&:hover": { backgroundColor: "#915fc1" },
+              }}>
+            Create New Card
+            </Button>
         </section>
+      </>
     )
 
 };
