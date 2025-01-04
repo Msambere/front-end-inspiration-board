@@ -6,24 +6,25 @@ const NewCardForm =({createNewCard, currentBoard, setSubmitStatus}) => {
     const [cardText, setCardText] = useState('');
 
     const closeForm = (event) =>{
-        event.preventDefault();
+        // event.preventDefault();
         const newCardForm = document.getElementById("newCardForm");
         newCardForm.close();
     }
 
 
     const handleSubmit = (event) => {
+        console.log(event);
         event.preventDefault();
         console.log(`Submit ${cardText}`);
-        if (cardText.length <0 || cardText.length >40){
+        if (cardText.length < 1 || cardText.length >40){
             setSubmitStatus('Card text must be between 1 and 40 characters');
         }else{
             createNewCard(currentBoard, {text: cardText});
             setSubmitStatus('Card successfully created');
         }
-        document.getElementById('cardSubmitStatus').showModal();
         setCardText('');
         closeForm();
+        document.getElementById('cardSubmitStatus').showModal();
     }
 
 
@@ -35,7 +36,6 @@ const NewCardForm =({createNewCard, currentBoard, setSubmitStatus}) => {
             <input
             type="text"
             name="card-text"
-            required
             placeholder="Write your card text here"
             value={cardText}
             onChange={(event) => setCardText(event.target.value)}
