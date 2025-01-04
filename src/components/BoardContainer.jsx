@@ -36,10 +36,10 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
             </Box>
 
             <Grid container spacing={3} sx={{ padding: 2 }}>
-                <Grid item xs={12}>
+                <Grid xs={12}>
                     <Grid container spacing={3} justifyContent="center">
                         {boards.map((board, index) => (
-                            <Grid item xs={12} sm={6} md={4} key={index}>
+                            <Grid xs={12} sm={6} md={4} key={index}>
                                 <Card
                                     variant="outlined"
                                     sx={{

@@ -32,6 +32,7 @@ const Board = ({ boardId }) => {
     </>
   );
 };
+
 Board.propTypes = {
   boardId: PropTypes.number.isRequired,
 };
