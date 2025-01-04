@@ -22,7 +22,7 @@ export const singleBoardAPICall = (boardId) => {
   return axios
     .get(`${VITE_APP_BACKEND_URL}/boards/${boardId}`)
     .then((response) => {
-      return response.data;
+      return response.data.board;
     })
     .catch((error) => {
       console.error("Error fetching board:", error);
