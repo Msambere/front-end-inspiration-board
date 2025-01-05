@@ -6,7 +6,7 @@ import CardContainer from "./CardContainer.jsx";
 import { Button } from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-const Board = ({ boardId }) => {
+const Board = ({ boardId, onViewAllBoards }) => {
   const [board, setBoard] = useState(null); // holding current cards
 
   useEffect(() => {
@@ -31,6 +31,7 @@ const Board = ({ boardId }) => {
     <>
         <Button
           startIcon={<ArrowBackIosNewIcon />}
+          onClick={onViewAllBoards}
           sx={{
             backgroundColor: "#a389d4",
             color: "#ffffff",
@@ -47,6 +48,7 @@ const Board = ({ boardId }) => {
 
 Board.propTypes = {
   boardId: PropTypes.number.isRequired,
+  onViewAllBoards: PropTypes.func.isRequired,
 };
 
 export default Board;
