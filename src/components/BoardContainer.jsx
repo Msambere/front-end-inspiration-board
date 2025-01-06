@@ -17,11 +17,13 @@ import {
   IconButton,
   Stack,
   Typography,
+  Container
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SortingButtons from "./SortingButtons.jsx";
 import sortData from "../utils/sort.js";
+import './BoardContainer.css';
 
 const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
   const [openCreateBoard, setOpenCreateBoard] = useState(false);
@@ -30,12 +32,12 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
     Owner: "owner",
     Alphabetically: "title",
     "# of Cards": ["cards", "length"],
-  }; // Is there a way to extract this from data?
+  }; 
   const [sortValue, setSortValue] = useState("Id");
   const [sortOrder, setSortOrder] = useState("asc");
 
   return (
-    <>
+    <Container id="all-boards-container" sx={{ mt: 2, backgroundColor: "#D4D1D1" }} >
       <Box
         sx={{
           display: "flex",
@@ -139,7 +141,7 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
         isOpen={openCreateBoard}
         onClose={() => setOpenCreateBoard(false)}
       />
-    </>
+    </Container>
   );
 };
 

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { singleBoardAPICall, newCardAPICall } from "../api/api.js";
+import { useState,} from "react";
+import { boardDataAPICall, newCardAPICall } from "../api/api.js";
 import PropTypes from "prop-types";
 import NewCardForm from "./newCardForm.jsx";
 import CardContainer from "./CardContainer.jsx";
@@ -8,26 +8,20 @@ import { Button } from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import sortData from "../utils/sort.js";
 
-const Board = ({ boardId, onViewAllBoards }) => {
-  const [board, setBoard] = useState(null);
+const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
   const [newCardSubmitStatus, setNewCardSubmitStatus] = useState(null);
   const [sortValue, setSortValue] = useState("Id");
   const [sortOrder, setSortOrder] = useState("asc");
 
 
-  useEffect(() => {
-    singleBoardAPICall(boardId).then((newBoard) => {
-      setBoard(newBoard);
-    });
-  }, [boardId]);
+ const currentBoard = allBoards.find((board) => board.id === boardId);
 
   const sortOptions = {"Id":"id", "Likes":"likes", "Alphabetically":"text"}; // Is there a way to extract this from data?
 
 
     const createNewCard = (board_id, newCardData) => {
     return newCardAPICall(board_id, newCardData).then(() => {
-      singleBoardAPICall(boardId).then((newBoard) => {
-        setBoard(newBoard);
+      boardDataAPICall().then((boards) => {setBoards(boards)
       });
     });
   };
@@ -37,7 +31,7 @@ const Board = ({ boardId, onViewAllBoards }) => {
     setNewCardSubmitStatus(null);
   };
 
-  if (!board) {
+  if (!currentBoard) {
     return <div>Loading board...</div>;
   }
 
@@ -54,9 +48,9 @@ const Board = ({ boardId, onViewAllBoards }) => {
       >
         View All Boards
       </Button>
-      <h1>{board.title}</h1>
+      <h1>{currentBoard.title}</h1>
       <SortingButtons options={sortOptions} setSortValue={setSortValue} setSortOrder={setSortOrder} sortValue={sortValue} sortOrder={sortOrder}/>
-      <CardContainer cardData={sortData(board.cards, sortOptions, sortValue, sortOrder)} />
+      <CardContainer cardData={sortData(currentBoard.cards, sortOptions, sortValue, sortOrder)} />
       <NewCardForm createNewCard={createNewCard} currentBoard={boardId} setSubmitStatus={setNewCardSubmitStatus} />
       <dialog id="cardSubmitStatus">
         {newCardSubmitStatus}
@@ -69,6 +63,21 @@ const Board = ({ boardId, onViewAllBoards }) => {
 Board.propTypes = {
   boardId: PropTypes.number.isRequired,
   onViewAllBoards: PropTypes.func.isRequired,
+  allBoards: PropTypes.arrayOf(PropTypes.shape(
+    {
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      owner: PropTypes.string.isRequired,
+      cards: PropTypes.arrayOf(PropTypes.shape(
+        {
+          id: PropTypes.number.isRequired,
+          text: PropTypes.string.isRequired,
+          likes: PropTypes.number.isRequired,
+        }
+      )).isRequired,
+    }
+  )).isRequired,
+  setBoards: PropTypes.func.isRequired,
 };
 
 export default Board;
