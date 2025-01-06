@@ -70,3 +70,11 @@ export const cardLikesAPICall = (cardId) => {
       console.error("Error:", error);
     });
 };
+
+export const cardDeleteAPICall = (cardId) => {
+  return axios
+    .delete(`${VITE_APP_BACKEND_URL}/cards/${cardId}`)
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+};

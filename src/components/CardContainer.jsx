@@ -9,11 +9,17 @@ const openNewCardForm = () => {
   newCardForm.showModal();
 };
 
-const CardContainer = ({cardData}) => {
+const CardContainer = ({ cardData, onDeleteCard }) => {
 
-    const cards = cardData?.map((card) => {
-        return(
-            <Card key={card.id} text={card.text} likes={card.likes} />
+    const cards = cardData.map((card) => {
+        return (
+          <Card 
+            key={card.id} 
+            id={card.id} 
+            text={card.text} 
+            likes={card.likes} 
+            onDeleteCard={onDeleteCard}
+          />
         )
     });
 
@@ -44,6 +50,11 @@ CardContainer.propTypes = {
         text: PropTypes.string.isRequired,
         likes: PropTypes.number.isRequired
     })).isRequired,
+    onDeleteCard: PropTypes.func.isRequired,
+    // sortValue: PropTypes.string.isRequired,
+    // sortOrder: PropTypes.string.isRequired
+    //     likes: PropTypes.number.isRequired,
+    // })).isRequired
 };
 
 
