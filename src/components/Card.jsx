@@ -6,12 +6,8 @@ import { cardLikesAPICall } from '../api/api';
 
 const Card = ({ id, text, likes: initialLikes }) => {
   const [likes, setLikes] = useState(initialLikes);
-  const [isLiking, setIsLiking] = useState(false);
 
   const handleLikes = async () => {
-    if (isLiking) return;
-    setIsLiking(true);
-    
     try {
       const responseAPI = await cardLikesAPICall(id);
       if (responseAPI && responseAPI.card) {
@@ -19,9 +15,7 @@ const Card = ({ id, text, likes: initialLikes }) => {
       }
     } catch (error) {
       console.log("Error:", error);
-    } finally {
-      setIsLiking(false);
-    }
+    } 
   };
 
   return (
