@@ -20,15 +20,10 @@ const Card = ({ id, text, likes: initialLikes, onDeleteCard }) => {
   };
 
   const handleDeleteCard = () => {
-    try {
-      cardDeleteAPICall(id);
-      if (onDeleteCard) {
-        onDeleteCard(id);
-      }
-    } catch (error) {
-      console.log("Error:", error);
-    }
-  };
+    return cardDeleteAPICall(id).then(() => {
+      onDeleteCard();
+      })
+    };
 
   return (
     <div className="card">

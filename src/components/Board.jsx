@@ -14,7 +14,7 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
   const [sortOrder, setSortOrder] = useState("asc");
 
 
- const currentBoard = allBoards.find((board) => board.id === boardId);
+  const currentBoard = allBoards.find((board) => board.id === boardId);
 
   const sortOptions = { "Id": "id", "Likes": "likes", "Alphabetically": "text" }; // Is there a way to extract this from data?
 
@@ -35,19 +35,10 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
     return <div>Loading board...</div>;
   }
 
-  const handleDeleteCard = (id) => {
-    setBoard((prevBoard) => {
-      if (!prevBoard) {
-        return prevBoard;
-      }
-
-      const updatedCards = prevBoard.cards.filter((card) => card.id !== id);
-      return {
-        ...prevBoard,
-        cards: updatedCards,
-      }
-    });
-  };
+  const handleDeleteCard = () => {
+      boardDataAPICall().then((boards) => {setBoards(boards)
+      });
+    };
 
   return (
     <>
