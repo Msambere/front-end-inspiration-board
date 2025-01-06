@@ -1,45 +1,68 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import NewBoardForm from "./NewBoardForm.jsx";
-import {boardDataAPICall, deleteBoardAPICall, newBoardAPICall} from "../api/api.js";
+import {
+  boardDataAPICall,
+  deleteBoardAPICall,
+  newBoardAPICall,
+} from "../api/api.js";
 import Grid from "@mui/material/Grid2";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import {Box, Button, CardActionArea, CardActions, IconButton, Stack, Typography} from "@mui/material";
+import {
+  Box,
+  Button,
+  CardActionArea,
+  CardActions,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SortingButtons from "./SortingButtons.jsx";
 import sortData from "../utils/sort.js";
 
 const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
-    const [openCreateBoard, setOpenCreateBoard] = useState(false);
-    const sortOptions = {"Id":"id", "Owner":"owner", "Alphabetically":"title"}; // Is there a way to extract this from data?
-    const [sortValue, setSortValue] = useState("Id");
-    const [sortOrder, setSortOrder] = useState("asc");
+  const [openCreateBoard, setOpenCreateBoard] = useState(false);
+  const sortOptions = {
+    Id: "id",
+    Owner: "owner",
+    Alphabetically: "title",
+    "# of Cards": ["cards", "length"],
+  }; // Is there a way to extract this from data?
+  const [sortValue, setSortValue] = useState("Id");
+  const [sortOrder, setSortOrder] = useState("asc");
 
-    return (
-        <>
-            <Box
-                sx={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    padding: "16px",
-                }}
-            >
-                <Button
-                    variant="contained"
-                    endIcon={<AddIcon />}
-                    onClick={() => setOpenCreateBoard(true)}
-                    sx={{
-                        backgroundColor: "#a389d4",
-                        color: "#ffffff",
-                        "&:hover": { backgroundColor: "#915fc1" },
-                    }}
-                >
-                    Create New Board
-                </Button>
-                <SortingButtons options={sortOptions} setSortValue={setSortValue} setSortOrder={setSortOrder} sortValue={sortValue} sortOrder={sortOrder}/>
-            </Box>
+  return (
+    <>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          padding: "16px",
+        }}
+      >
+        <Button
+          variant="contained"
+          endIcon={<AddIcon />}
+          onClick={() => setOpenCreateBoard(true)}
+          sx={{
+            backgroundColor: "#a389d4",
+            color: "#ffffff",
+            "&:hover": { backgroundColor: "#915fc1" },
+          }}
+        >
+          Create New Board
+        </Button>
+        <SortingButtons
+          options={sortOptions}
+          setSortValue={setSortValue}
+          setSortOrder={setSortOrder}
+          sortValue={sortValue}
+          sortOrder={sortOrder}
+        />
+      </Box>
 
             <Grid container spacing={3} sx={{ padding: 2 }}>
                 <Grid xs={12}>
@@ -104,22 +127,26 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
                 </Grid>
             </Grid>
 
-            {/* New Board Form */}
-            <NewBoardForm
-                createNewBoard={(data)=> {
-                    newBoardAPICall(data).then(() => {boardDataAPICall().then(allBoards => {setBoards(allBoards)})});
-                }}
-                isOpen={openCreateBoard}
-                onClose={() => setOpenCreateBoard(false)}
-            />
-        </>
-    );
+      {/* New Board Form */}
+      <NewBoardForm
+        createNewBoard={(data) => {
+          newBoardAPICall(data).then(() => {
+            boardDataAPICall().then((allBoards) => {
+              setBoards(allBoards);
+            });
+          });
+        }}
+        isOpen={openCreateBoard}
+        onClose={() => setOpenCreateBoard(false)}
+      />
+    </>
+  );
 };
 
 BoardContainer.propTypes = {
-    boards: PropTypes.array.isRequired,
-    onSelectBoard: PropTypes.func.isRequired,
-    setBoards:PropTypes.func.isRequired
+  boards: PropTypes.array.isRequired,
+  onSelectBoard: PropTypes.func.isRequired,
+  setBoards: PropTypes.func.isRequired,
 };
 
 export default BoardContainer;
