@@ -6,7 +6,7 @@ import CardContainer from "./CardContainer.jsx";
 import { Button } from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-const Board = ({ boardId }) => {
+const Board = ({ boardId, onViewAllBoards }) => {
   const [board, setBoard] = useState(null);
   const [newCardSubmitStatus, setNewCardSubmitStatus] = useState(null);
 
