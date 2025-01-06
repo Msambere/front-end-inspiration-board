@@ -1,6 +1,13 @@
 import Card from "./Card";
 import './CardContainer.css';
 import PropTypes from 'prop-types';
+import { Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+
+const openNewCardForm = () => {
+  const newCardForm = document.getElementById('newCardForm');
+  newCardForm.showModal();
+};
 
 const CardContainer = ({cardData}) => {
 
@@ -10,18 +17,25 @@ const CardContainer = ({cardData}) => {
         )
     });
 
-    const openNewCardForm = () => {
-        const newCardForm = document.getElementById('newCardForm');
-        newCardForm.showModal();
-    };
+  return (
+    <>
 
-    return(
-        <section className="cardContainer">
-            {cards}
-            <button onClick={openNewCardForm} className="addCardButton">+New Card</button>
-        </section>
-    )
-
+      <section className="cardContainer">
+          {cards}
+          <Button
+            variant="contained"
+            endIcon={<AddIcon />}
+            onClick={openNewCardForm}
+            sx={{
+                backgroundColor: "#a389d4",
+                color: "#ffffff",
+                "&:hover": { backgroundColor: "#915fc1" },
+            }}>
+          Create New Card
+          </Button>
+      </section>
+    </>
+  )
 };
 
 CardContainer.propTypes = {
@@ -30,8 +44,10 @@ CardContainer.propTypes = {
         text: PropTypes.string.isRequired,
         likes: PropTypes.number.isRequired
     })).isRequired,
-    sortValue: PropTypes.string.isRequired,
-    sortOrder: PropTypes.string.isRequired
+    // sortValue: PropTypes.string.isRequired,
+    // sortOrder: PropTypes.string.isRequired
+    //     likes: PropTypes.number.isRequired,
+    // })).isRequired
 };
 
 

@@ -4,12 +4,15 @@ import PropTypes from "prop-types";
 import NewCardForm from "./newCardForm.jsx";
 import CardContainer from "./CardContainer.jsx";
 import SortingButtons from "./SortingButtons.jsx";
+import { Button } from "@mui/material";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-const Board = ({ boardId }) => {
+const Board = ({ boardId, onViewAllBoards }) => {
   const [board, setBoard] = useState(null);
   const [newCardSubmitStatus, setNewCardSubmitStatus] = useState(null);
   const [sortValue, setSortValue] = useState("Id");
   const [sortOrder, setSortOrder] = useState("asc");
+
 
   useEffect(() => {
     singleBoardAPICall(boardId).then((newBoard) => {
@@ -56,6 +59,17 @@ const Board = ({ boardId }) => {
 
   return (
     <>
+      <Button
+        startIcon={<ArrowBackIosNewIcon />}
+        onClick={onViewAllBoards}
+        sx={{
+          backgroundColor: "#a389d4",
+          color: "#ffffff",
+          "&:hover": { backgroundColor: "#915fc1" },
+        }}
+      >
+        View All Boards
+      </Button>
       <h1>{board.title}</h1>
       <SortingButtons options={sortOptions} setSortValue={setSortValue} setSortOrder={setSortOrder} sortValue={sortValue} sortOrder={sortOrder}/>
       <CardContainer cardData={sortData(board.cards)} sortValue={sortValue} sortOrder={sortOrder} />
@@ -64,12 +78,15 @@ const Board = ({ boardId }) => {
         {newCardSubmitStatus}
         <button onClick={closeSubmitStatusDialog}>Close</button>
       </dialog>
+      <CardContainer cardData={board.cards} />
+      <NewCardForm createNewCard={createNewCard} currentBoard={boardId} />
     </>
   );
 };
 
 Board.propTypes = {
   boardId: PropTypes.number.isRequired,
+  onViewAllBoards: PropTypes.func.isRequired,
 };
 
 export default Board;
