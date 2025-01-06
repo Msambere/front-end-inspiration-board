@@ -5,7 +5,6 @@ const sortData = (data, sortOptions, sortValue, sortOrder) => {
         return data;
     } 
     if (Array.isArray(key)) {
-        console.log(key);
         let getLength = null
         let lookup ="";
         for (let i of key){
@@ -15,7 +14,6 @@ const sortData = (data, sortOptions, sortValue, sortOrder) => {
                 lookup += `${i}`;
             }
         }
-        console.log(lookup);
         if (getLength) {
             sortedData = data.toSorted((a, b) => {
                 return sortOrder === "asc"
