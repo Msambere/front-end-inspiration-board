@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import NewCardForm from "./newCardForm.jsx";
 import CardContainer from "./CardContainer.jsx";
 import SortingButtons from "./SortingButtons.jsx";
-import { Button } from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { Box, Button } from '@mui/material';
 import sortData from "../utils/sort.js";
 
 const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
@@ -14,9 +14,9 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
   const [sortOrder, setSortOrder] = useState("asc");
 
 
- const currentBoard = allBoards.find((board) => board.id === boardId);
+  const currentBoard = allBoards.find((board) => board.id === boardId);
 
-  const sortOptions = {"Id":"id", "Likes":"likes", "Alphabetically":"text"}; // Is there a way to extract this from data?
+  const sortOptions = { "Id": "id", "Likes": "likes", "Alphabetically": "text" }; // Is there a way to extract this from data?
 
 
     const createNewCard = (board_id, newCardData) => {
@@ -35,27 +35,42 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
     return <div>Loading board...</div>;
   }
 
+  const handleDeleteCard = () => {
+      boardDataAPICall().then((boards) => {setBoards(boards)
+      });
+    };
+
   return (
     <>
-      <Button
-        startIcon={<ArrowBackIosNewIcon />}
-        onClick={onViewAllBoards}
-        sx={{
-          backgroundColor: "#a389d4",
-          color: "#ffffff",
-          "&:hover": { backgroundColor: "#915fc1" },
-        }}
-      >
-        View All Boards
-      </Button>
-      <h1>{currentBoard.title}</h1>
-      <SortingButtons options={sortOptions} setSortValue={setSortValue} setSortOrder={setSortOrder} sortValue={sortValue} sortOrder={sortOrder}/>
-      <CardContainer cardData={sortData(currentBoard.cards, sortOptions, sortValue, sortOrder)} />
+      <Box sx={{ padding: 2, backgroundColor: '#dcdcdc', minHeight: '100vh' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 3 }}>
+          <Button
+            startIcon={<ArrowBackIosNewIcon />}
+            variant="outlined"
+            onClick={onViewAllBoards}
+            sx={{
+              backgroundColor: "#a389d4",
+              color: "#ffffff",
+              "&:hover": { backgroundColor: "#915fc1" },
+            }}
+          >
+            View All Boards
+          </Button>
+        </Box>
+
+        <h1>{currentBoard.title}</h1>
+        <SortingButtons options={sortOptions} setSortValue={setSortValue} setSortOrder={setSortOrder} sortValue={sortValue} sortOrder={sortOrder} />
+
+
+        <CardContainer cardData={sortData(currentBoard.cards, sortOptions, sortValue, sortOrder)} onDeleteCard={handleDeleteCard} />
+      </Box>
+
       <NewCardForm createNewCard={createNewCard} currentBoard={boardId} setSubmitStatus={setNewCardSubmitStatus} />
       <dialog id="cardSubmitStatus">
         {newCardSubmitStatus}
         <button onClick={closeSubmitStatusDialog}>Close</button>
       </dialog>
+      
     </>
   );
 };

@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
 import './Card.css';
 import { useState } from 'react';
-import { cardLikesAPICall } from '../api/api';
+import { cardLikesAPICall, cardDeleteAPICall } from '../api/api';
+import ClearIcon from '@mui/icons-material/Clear';
+import { Button } from '@mui/material';
 
-
-const Card = ({ id, text, likes: initialLikes }) => {
+const Card = ({ id, text, likes: initialLikes, onDeleteCard }) => {
   const [likes, setLikes] = useState(initialLikes);
 
   const handleLikes = async () => {
@@ -18,8 +19,19 @@ const Card = ({ id, text, likes: initialLikes }) => {
     } 
   };
 
+  const handleDeleteCard = () => {
+    return cardDeleteAPICall(id).then(() => {
+      onDeleteCard();
+      })
+    };
+
   return (
     <div className="card">
+      <Button onClick={handleDeleteCard}>
+        <ClearIcon 
+        fontSize="small"
+        />
+      </Button>
       <p className="cardText">{text}</p>
       <button 
         className="likeButton" 
@@ -35,6 +47,7 @@ Card.propTypes ={
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   likes: PropTypes.number.isRequired,
+  onDeleteCard: PropTypes.func.isRequired,
 };
 
 export default Card;
