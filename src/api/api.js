@@ -6,7 +6,6 @@ export const newBoardAPICall = (newBoardData) => {
   return axios
     .post(`${VITE_APP_BACKEND_URL}/boards`, newBoardData)
     .then((response) => {
-      console.log("API Response:", response.data.board);
       return response.data.board;
     })
     .catch((error) => {
@@ -44,7 +43,6 @@ export const newCardAPICall = (board_id, newCardData) => {
   return axios
     .post(`${VITE_APP_BACKEND_URL}/boards/${board_id}/cards`, newCardData)
     .then((response) => {
-      console.log("API Response:", response.data.card);
       return response.data.card;
     })
     .catch((error) => {

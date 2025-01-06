@@ -9,20 +9,13 @@ const openNewCardForm = () => {
   newCardForm.showModal();
 };
 
-const CardContainer = ({ cardData }) => {
+const CardContainer = ({cardData}) => {
 
-  const sortedCards = [...cardData].sort((card1, card2) => card1.id - card2.id);
-  
-  const cards = sortedCards.map((card) => {
-      return (
-        <Card 
-          key={card.id} 
-          id={card.id} 
-          text={card.text} 
-          likes={card.likes} 
-        />
-      )
-  });
+    const cards = cardData.map((card) => {
+        return(
+            <Card key={card.id} text={card.text} likes={card.likes} />
+        )
+    });
 
   return (
     <>
@@ -49,8 +42,12 @@ CardContainer.propTypes = {
     cardData: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         text: PropTypes.string.isRequired,
-        likes: PropTypes.number.isRequired,
-    })).isRequired
+        likes: PropTypes.number.isRequired
+    })).isRequired,
+    // sortValue: PropTypes.string.isRequired,
+    // sortOrder: PropTypes.string.isRequired
+    //     likes: PropTypes.number.isRequired,
+    // })).isRequired
 };
 
 

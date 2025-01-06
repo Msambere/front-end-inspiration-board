@@ -13,9 +13,7 @@ const NewCardForm =({createNewCard, currentBoard, setSubmitStatus}) => {
 
 
     const handleSubmit = (event) => {
-        console.log(event);
         event.preventDefault();
-        console.log(`Submit ${cardText}`);
         if (cardText.length < 1 || cardText.length >40){
             setSubmitStatus('Card text must be between 1 and 40 characters');
         }else{
