@@ -17,28 +17,22 @@ const Board = ({ boardId }) => {
     });
   }, [boardId]);
 
-  const sortOptions = ["Id", "Likes", "Alphabetically"];
+  const sortOptions = {"Id":"id", "Likes":"likes", "Alphabetically":"text"}; // Is there a way to extract this from data?
 
-
-  const sortedCardData = (data) => {
-    switch (sortValue) {
-      case "Id":
-        return data.sort((a, b) => {
-          return sortOrder === "asc" ? a.id - b.id : b.id - a.id;
-        });
-      case "Likes":
-        return data.sort((a, b) => {
-          return sortOrder === "asc" ? a.likes - b.likes : b.likes - a.likes;
-        });
-      case "Alphabetically":
-        return data.sort((a, b) => {
-          return sortOrder === "asc"
-            ? a.text.localeCompare(b.text)
-            : b.text.localeCompare(a.text);
-        });
-      default:
-        return data;
+  const sortData = (data) => {
+    const key = sortOptions[sortValue];
+    let sortedData;
+    if (typeof data[0][key] === "string" ) {
+      sortedData =  data.toSorted((a, b) => {
+        return sortOrder === "asc" ? a[key].localeCompare(b[key]) : b[key].localeCompare(a[key]);
+  
+      });
+    }else{
+      sortedData =  data.toSorted((a, b) => {
+        return sortOrder === "asc" ? a[key] - b[key] : b[key] - a[key];
+      });
     }
+    return sortedData;
   };
 
 
@@ -64,7 +58,7 @@ const Board = ({ boardId }) => {
     <>
       <h1>{board.title}</h1>
       <SortingButtons options={sortOptions} setSortValue={setSortValue} setSortOrder={setSortOrder} sortValue={sortValue} sortOrder={sortOrder}/>
-      <CardContainer cardData={sortedCardData(board.cards)} sortValue={sortValue} sortOrder={sortOrder} />
+      <CardContainer cardData={sortData(board.cards)} sortValue={sortValue} sortOrder={sortOrder} />
       <NewCardForm createNewCard={createNewCard} currentBoard={boardId} setSubmitStatus={setNewCardSubmitStatus} />
       <dialog id="cardSubmitStatus">
         {newCardSubmitStatus}

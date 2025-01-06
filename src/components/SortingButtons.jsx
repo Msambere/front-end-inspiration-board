@@ -6,9 +6,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 const SortingButtons = ({options, setSortOrder, setSortValue, sortValue, sortOrder}) => {
-    const menuItems = options.map((option) => {
+    const menuItems = Object.entries(options).map(([key,value]) => {
         return (
-            <MenuItem key={option} value={option}>{option}</MenuItem>
+            <MenuItem key={value} value={key}>{key}</MenuItem>
         )});
 
 
@@ -56,7 +56,10 @@ const SortingButtons = ({options, setSortOrder, setSortValue, sortValue, sortOrd
 }
 
 SortingButtons.propTypes = {
-    options: PropTypes.arrayOf(PropTypes.string).isRequired,
+    options: PropTypes.shape(
+        PropTypes.string.isRequired,
+        PropTypes.string.isRequired
+    ).isRequired,
     setSortOrder: PropTypes.func.isRequired,
     setSortValue: PropTypes.func.isRequired,
     sortValue: PropTypes.string.isRequired,
