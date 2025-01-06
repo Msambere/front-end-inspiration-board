@@ -9,26 +9,24 @@ function App() {
     const [boards, setBoards] = useState([]);
     const [selectedBoardId, setSelectedBoardId] = useState(null);
 
-    // Fetch all boards on component mount
     useEffect(() => {
         boardDataAPICall().then((boards) => {setBoards(boards)});
     }, []);
 
-    // Handler for when user selects a board from the sidebar
     const handleSelectBoard = (boardId) => {
         setSelectedBoardId(boardId);
     };
 
-  return (
-      <>
-          <AppBar position="static">
-              <Toolbar>
-                  <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                      Inspiration Board
-                  </Typography>
-              </Toolbar>
-          </AppBar>
-          <Container maxWidth="xl" spacing={2}>
+    return (
+        <>
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        Inspiration Board
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+            <Container maxWidth="xl" spacing={2}>
                 {selectedBoardId !== null ? (
                     <Board boardId={selectedBoardId} />
                 ) : (
@@ -39,9 +37,9 @@ function App() {
                     />
                 )}
             </Container>
-      </>
+        </>
 
-  )
+    )
 }
 
 export default App

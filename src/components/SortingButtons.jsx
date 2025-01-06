@@ -14,12 +14,10 @@ const SortingButtons = ({options, setSortOrder, setSortValue, sortValue, sortOrd
 
     const handleSortValueChange = (event) => {
         setSortValue(event.target.value);
-        console.log("Current sort value: ", event.target.value);
     };
 
     const handleSortOrderChange = (event) => {
         setSortOrder(event.target.value);
-        console.log("Current sort order: ", event.target.value);
     };
 
     return (
