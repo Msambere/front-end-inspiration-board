@@ -13,6 +13,16 @@ export const newBoardAPICall = (newBoardData) => {
     });
 };
 
+export const deleteBoardAPICall = (boardId) => {
+  if (!boardId) {
+    console.error("Invalid boardId provided:", boardId);
+  }
+  return axios
+      .delete(`${VITE_APP_BACKEND_URL}/boards/${boardId}`)
+      .catch((error) => {
+        console.error("Error deleting board:", error);
+      });
+};
 export const singleBoardAPICall = (boardId) => {
   if (!boardId) {
     console.error("Invalid boardId provided:", boardId);

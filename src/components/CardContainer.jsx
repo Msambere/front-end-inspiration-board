@@ -11,7 +11,7 @@ const openNewCardForm = () => {
 
 const CardContainer = ({cardData}) => {
 
-    const cards = cardData.map((card) => {
+    const cards = cardData?.map((card) => {
         return(
             <Card key={card.id} text={card.text} likes={card.likes} />
         )
@@ -44,10 +44,6 @@ CardContainer.propTypes = {
         text: PropTypes.string.isRequired,
         likes: PropTypes.number.isRequired
     })).isRequired,
-    // sortValue: PropTypes.string.isRequired,
-    // sortOrder: PropTypes.string.isRequired
-    //     likes: PropTypes.number.isRequired,
-    // })).isRequired
 };
 
 

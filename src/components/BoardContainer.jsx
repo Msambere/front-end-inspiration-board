@@ -1,16 +1,21 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import NewBoardForm from "./NewBoardForm.jsx";
-import {boardDataAPICall, newBoardAPICall} from "../api/api.js";
+import {boardDataAPICall, deleteBoardAPICall, newBoardAPICall} from "../api/api.js";
 import Grid from "@mui/material/Grid2";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import {Box, Button, CardActionArea, CardActions, IconButton, Stack, Typography} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
+import SortingButtons from "./SortingButtons.jsx";
+import sortData from "../utils/sort.js";
 
 const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
     const [openCreateBoard, setOpenCreateBoard] = useState(false);
+    const sortOptions = {"Id":"id", "Owner":"owner", "Alphabetically":"title"}; // Is there a way to extract this from data?
+    const [sortValue, setSortValue] = useState("Id");
+    const [sortOrder, setSortOrder] = useState("asc");
 
     return (
         <>
@@ -33,12 +38,13 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
                 >
                     Create New Board
                 </Button>
+                <SortingButtons options={sortOptions} setSortValue={setSortValue} setSortOrder={setSortOrder} sortValue={sortValue} sortOrder={sortOrder}/>
             </Box>
 
             <Grid container spacing={3} sx={{ padding: 2 }}>
                 <Grid xs={12}>
                     <Grid container spacing={3} justifyContent="center">
-                        {boards.map((board, index) => (
+                        {sortData(boards, sortOptions, sortValue, sortOrder).map((board, index) => (
                             <Grid xs={12} sm={6} md={4} key={index}>
                                 <Card
                                     variant="outlined"
@@ -83,7 +89,11 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
                                     </CardActionArea>
                                     <CardActions>
                                         <Stack direction="row" spacing={1}>
-                                        <IconButton aria-label="delete">
+                                        <IconButton aria-label="delete" onClick={()=> {
+                                            deleteBoardAPICall(board.id).then(() => {
+                                                boardDataAPICall().then(newBoards => setBoards(newBoards))
+                                            });
+                                        }}>
                                             <DeleteIcon />
                                         </IconButton>
                                         </Stack>
