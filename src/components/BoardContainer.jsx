@@ -50,7 +50,6 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
                                     variant="outlined"
                                     sx={{
                                         borderRadius: "16px",
-                                        backgroundColor: index === 2 ? "#e0e0e0" : "#ffffff",
                                         cursor: "pointer",
                                         height: "200px",
                                         "&:hover": {
