@@ -1,5 +1,6 @@
 import './App.css'
-import InspirationBoard from "./components/InspirationBoard.jsx";
+// import InspirationBoard from "./components/InspirationBoard.jsx";
+import BoardContainer from './components/BoardContainer.jsx';
 import {AppBar, Container, Toolbar, Typography} from "@mui/material";
 import {boardDataAPICall} from "./api/api.js";
 import { useEffect, useState } from 'react';
@@ -35,12 +36,14 @@ function App() {
                     <Board 
                         boardId={selectedBoardId}
                         onViewAllBoards={handleViewAllBoards} 
+                        allBoards={boards}
+                        setBoards={setBoards}
                     />
                 ) : (
-                    <InspirationBoard
+                    <BoardContainer
                         boards={boards}
                         setBoards={setBoards}
-                        handleSelectBoard={handleSelectBoard}
+                        onSelectBoard={handleSelectBoard}
                     />
                 )}
             </Container>
