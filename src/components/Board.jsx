@@ -7,7 +7,8 @@ import { Button } from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 const Board = ({ boardId, onViewAllBoards }) => {
-  const [board, setBoard] = useState(null); // holding current cards
+  const [board, setBoard] = useState(null);
+  const [newCardSubmitStatus, setNewCardSubmitStatus] = useState(null);
 
   useEffect(() => {
     singleBoardAPICall(boardId).then((newBoard) => {
@@ -21,6 +22,11 @@ const Board = ({ boardId, onViewAllBoards }) => {
         setBoard(newBoard);
       });
     });
+  };
+
+  const closeSubmitStatusDialog = () => {
+    document.getElementById('cardSubmitStatus').close();
+    setNewCardSubmitStatus(null);
   };
 
   if (!board) {
@@ -41,7 +47,11 @@ const Board = ({ boardId, onViewAllBoards }) => {
           View All Boards
         </Button>
       <CardContainer cardData={board.cards} />
-      <NewCardForm createNewCard={createNewCard} currentBoard={boardId} />
+      <NewCardForm createNewCard={createNewCard} currentBoard={boardId} setSubmitStatus={setNewCardSubmitStatus}/>
+      <dialog id="cardSubmitStatus">
+        {newCardSubmitStatus}
+        <button onClick={closeSubmitStatusDialog}>Close</button>
+      </dialog>
     </>
   );
 };
