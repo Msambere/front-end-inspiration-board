@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
-const openNewCardForm = () => {
-  const newCardForm = document.getElementById('newCardForm');
-  newCardForm.showModal();
-};
+// const openNewCardForm = () => {
+//   const newCardForm = document.getElementById('newCardForm');
+//   newCardForm.showModal();
+// };
 
 const CardContainer = ({ cardData, onDeleteCard }) => {
 
@@ -28,7 +28,8 @@ const CardContainer = ({ cardData, onDeleteCard }) => {
 
       <section className="cardContainer">
           {cards}
-          <Button
+          {/* <Button
+            id="newCardButton"
             variant="contained"
             endIcon={<AddIcon />}
             onClick={openNewCardForm}
@@ -38,7 +39,7 @@ const CardContainer = ({ cardData, onDeleteCard }) => {
                 "&:hover": { backgroundColor: "#915fc1" },
             }}>
           Create New Card
-          </Button>
+          </Button> */}
       </section>
     </>
   )
