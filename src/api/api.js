@@ -51,3 +51,14 @@ export const newCardAPICall = (board_id, newCardData) => {
       console.error("Error:", error);
     });
 };
+
+export const cardLikesAPICall = (cardId) => {
+  return axios
+    .patch(`${VITE_APP_BACKEND_URL}/cards/${cardId}/likes`)
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+};

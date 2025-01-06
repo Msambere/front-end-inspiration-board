@@ -19,6 +19,10 @@ function App() {
         setSelectedBoardId(boardId);
     };
 
+    const handleViewAllBoards = () => {
+      setSelectedBoardId(null);
+    }
+
   return (
       <>
           <AppBar position="static">
@@ -30,7 +34,10 @@ function App() {
           </AppBar>
           <Container maxWidth="xl" spacing={2}>
                 {selectedBoardId !== null ? (
-                    <Board boardId={selectedBoardId} />
+                    <Board 
+                      boardId={selectedBoardId}
+                      onViewAllBoards={handleViewAllBoards} 
+                    />
                 ) : (
                     <InspirationBoard
                         boards={boards}
