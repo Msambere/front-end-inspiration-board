@@ -17,6 +17,10 @@ function App() {
         setSelectedBoardId(boardId);
     };
 
+    const handleViewAllBoards = () => {
+        setSelectedBoardId(null);
+    };
+
     return (
         <>
             <AppBar position="static">

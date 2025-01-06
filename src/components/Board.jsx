@@ -78,8 +78,6 @@ const Board = ({ boardId, onViewAllBoards }) => {
         {newCardSubmitStatus}
         <button onClick={closeSubmitStatusDialog}>Close</button>
       </dialog>
-      <CardContainer cardData={board.cards} />
-      <NewCardForm createNewCard={createNewCard} currentBoard={boardId} />
     </>
   );
 };
