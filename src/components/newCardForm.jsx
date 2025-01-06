@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import './NewCardForm.css';
+import './newCardForm.css';
 
 const NewCardForm =({createNewCard, currentBoard, setSubmitStatus}) => {
     const [cardText, setCardText] = useState('');
 
-    const closeForm = (event) =>{
-        // event.preventDefault();
+    const closeForm = () =>{
+        setCardText("");
         const newCardForm = document.getElementById("newCardForm");
         newCardForm.close();
     }

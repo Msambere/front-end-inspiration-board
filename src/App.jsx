@@ -1,5 +1,4 @@
 import './App.css'
-// import InspirationBoard from "./components/InspirationBoard.jsx";
 import BoardContainer from './components/BoardContainer.jsx';
 import {AppBar, Container, Toolbar, Typography} from "@mui/material";
 import {boardDataAPICall} from "./api/api.js";
