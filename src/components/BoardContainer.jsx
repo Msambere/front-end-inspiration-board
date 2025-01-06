@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import NewBoardForm from "./NewBoardForm.jsx";
-import {boardDataAPICall, newBoardAPICall} from "../api/api.js";
+import {boardDataAPICall, deleteBoardAPICall, newBoardAPICall} from "../api/api.js";
 import Grid from "@mui/material/Grid2";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -83,7 +83,11 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
                                     </CardActionArea>
                                     <CardActions>
                                         <Stack direction="row" spacing={1}>
-                                        <IconButton aria-label="delete">
+                                        <IconButton aria-label="delete" onClick={()=> {
+                                            deleteBoardAPICall(board.id).then(() => {
+                                                boardDataAPICall().then(newBoards => setBoards(newBoards))
+                                            });
+                                        }}>
                                             <DeleteIcon />
                                         </IconButton>
                                         </Stack>
