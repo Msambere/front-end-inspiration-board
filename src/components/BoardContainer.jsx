@@ -37,7 +37,10 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards, loading }) => {
   const [sortOrder, setSortOrder] = useState("asc");
 
   return (
-    <Container id="all-boards-container" sx={{ mt: 2, backgroundColor: "#D4D1D1" }} >
+    <Container
+      id="all-boards-container"
+      sx={{ mt: 2, backgroundColor: "#D4D1D1" }}
+    >
       <Box
         sx={{
           display: "flex",
@@ -141,6 +144,18 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards, loading }) => {
         isOpen={openCreateBoard}
         onClose={() => setOpenCreateBoard(false)}
       />
+      <dialog id="boardSubmitErrorMsg">
+        <section className="dialog-content">
+          <p>Board must have a title and owner</p>
+          <button
+            onClick={() =>
+              document.getElementById("boardSubmitErrorMsg").close()
+            }
+          >
+            Close
+          </button>
+        </section>
+      </dialog>
     </Container>
   );
 };
