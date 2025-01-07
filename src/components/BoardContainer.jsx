@@ -25,7 +25,7 @@ import SortingButtons from "./SortingButtons.jsx";
 import sortData from "../utils/sort.js";
 import './BoardContainer.css';
 
-const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
+const BoardContainer = ({ boards, onSelectBoard, setBoards, loading }) => {
   const [openCreateBoard, setOpenCreateBoard] = useState(false);
   const sortOptions = {
     Id: "id",
@@ -65,70 +65,71 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
           sortOrder={sortOrder}
         />
       </Box>
-
-            <Grid container spacing={3} sx={{ padding: 2 }}>
-                <Grid xs={12}>
-                    <Grid container spacing={3} justifyContent="center">
-                        {sortData(boards, sortOptions, sortValue, sortOrder).map((board, index) => (
-                            <Grid xs={12} sm={6} md={4} key={index}>
-                                <Card
-                                    variant="outlined"
-                                    sx={{
-                                        borderRadius: "16px",
-                                        cursor: "pointer",
-                                        height: "300px",
-                                        width: "300px",
-                                        "&:hover": {
-                                            backgroundColor: "#f5f5f5",
-                                        },
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <CardActionArea onClick={() => onSelectBoard(board.id)}>
-                                        <CardContent>
-                                            <Typography
-                                                variant="h4"
-                                                component="div"
-                                                sx={{ fontWeight: "bold", textAlign: "center" }}
-                                            >
-                                                {board.title}
-                                            </Typography>
-                                            <Typography
-                                                variant="subtitle1"
-                                                component="div"
-                                                sx={{ textAlign: "center", color: "gray" }}
-                                            >
-                                                Owner: {board.owner ?? "no owner"}
-                                            </Typography>
-                                            <Typography
-                                                variant="subtitle2"
-                                                component="div"
-                                                sx={{ textAlign: "center", color: "gray" }}
-                                            >
-                                                Cards: {board.cards.length}
-                                            </Typography>
-                                        </CardContent>
-                                    </CardActionArea>
-                                    <CardActions>
-                                        <Stack direction="row" spacing={1}>
-                                        <IconButton aria-label="delete" onClick={()=> {
-                                            deleteBoardAPICall(board.id).then(() => {
-                                                boardDataAPICall().then(newBoards => setBoards(newBoards))
-                                            });
-                                        }}>
-                                            <DeleteIcon />
-                                        </IconButton>
-                                        </Stack>
-                                    </CardActions>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Grid>
-            </Grid>
+      { loading ? (<div>Loading...</div>) :
+      (<Grid id="board-grid" container spacing={3} sx={{ padding: 2 }}>
+          <Grid xs={12}>
+              <Grid container spacing={3} justifyContent="center">
+                  {sortData(boards, sortOptions, sortValue, sortOrder).map((board, index) => (
+                      <Grid xs={12} sm={6} md={4} key={index}>
+                          <Card
+                              variant="outlined"
+                              sx={{
+                                  borderRadius: "16px",
+                                  cursor: "pointer",
+                                  height: "300px",
+                                  width: "300px",
+                                  "&:hover": {
+                                      backgroundColor: "#f5f5f5",
+                                  },
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                              }}
+                          >
+                              <CardActionArea onClick={() => onSelectBoard(board.id)}>
+                                  <CardContent>
+                                      <Typography
+                                          variant="h4"
+                                          component="div"
+                                          sx={{ fontWeight: "bold", textAlign: "center" }}
+                                      >
+                                          {board.title}
+                                      </Typography>
+                                      <Typography
+                                          variant="subtitle1"
+                                          component="div"
+                                          sx={{ textAlign: "center", color: "gray" }}
+                                      >
+                                          Owner: {board.owner ?? "no owner"}
+                                      </Typography>
+                                      <Typography
+                                          variant="subtitle2"
+                                          component="div"
+                                          sx={{ textAlign: "center", color: "gray" }}
+                                      >
+                                          Cards: {board.cards.length}
+                                      </Typography>
+                                  </CardContent>
+                              </CardActionArea>
+                              <CardActions>
+                                  <Stack direction="row" spacing={1}>
+                                  <IconButton aria-label="delete" onClick={()=> {
+                                      deleteBoardAPICall(board.id).then(() => {
+                                          boardDataAPICall().then(newBoards => setBoards(newBoards))
+                                      });
+                                  }}>
+                                      <DeleteIcon />
+                                  </IconButton>
+                                  </Stack>
+                              </CardActions>
+                          </Card>
+                      </Grid>
+                  ))}
+              </Grid>
+          </Grid>
+      </Grid>)
+      }
       <NewBoardForm
         createNewBoard={(data) => {
           newBoardAPICall(data).then(() => {
@@ -148,6 +149,7 @@ BoardContainer.propTypes = {
   boards: PropTypes.array.isRequired,
   onSelectBoard: PropTypes.func.isRequired,
   setBoards: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default BoardContainer;
