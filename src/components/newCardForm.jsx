@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import './newCardForm.css';
 
-const NewCardForm =({createNewCard, currentBoard, setSubmitStatus}) => {
+const NewCardForm =({createNewCard, currentBoard}) => {
     const [cardText, setCardText] = useState('');
 
     const closeForm = () =>{
@@ -15,14 +15,12 @@ const NewCardForm =({createNewCard, currentBoard, setSubmitStatus}) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (cardText.length < 1 || cardText.length >40){
-            setSubmitStatus('Card text must be between 1 and 40 characters');
+            document.getElementById('cardSubmitErrorMsg').showModal();
         }else{
             createNewCard(currentBoard, {text: cardText});
-            setSubmitStatus('Card successfully created');
         }
         setCardText('');
         closeForm();
-        document.getElementById('cardSubmitStatus').showModal();
     }
 
 

@@ -1,20 +1,26 @@
 import { useState,} from "react";
+import './Board.css';
 import { boardDataAPICall, newCardAPICall } from "../api/api.js";
 import PropTypes from "prop-types";
 import NewCardForm from "./newCardForm.jsx";
 import CardContainer from "./CardContainer.jsx";
 import SortingButtons from "./SortingButtons.jsx";
-import { Button } from "@mui/material";
+import { Button, Container, Box } from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import AddIcon from "@mui/icons-material/Add";
 import sortData from "../utils/sort.js";
 
+const openNewCardForm = () => {
+  const newCardForm = document.getElementById("newCardForm");
+  newCardForm.showModal();
+};
+
 const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
-  const [newCardSubmitStatus, setNewCardSubmitStatus] = useState(null);
   const [sortValue, setSortValue] = useState("Id");
   const [sortOrder, setSortOrder] = useState("asc");
 
 
- const currentBoard = allBoards.find((board) => board.id === boardId);
+  const currentBoard = allBoards.find((board) => board.id === boardId);
 
   const sortOptions = {"Id":"id", "Likes":"likes", "Alphabetically":"text"}; // Is there a way to extract this from data?
 
@@ -26,11 +32,6 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
     });
   };
 
-  const closeSubmitStatusDialog = () => {
-    document.getElementById('cardSubmitStatus').close();
-    setNewCardSubmitStatus(null);
-  };
-
   if (!currentBoard) {
     return <div>Loading board...</div>;
   }
@@ -38,6 +39,7 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
   return (
     <>
       <Button
+        id="viewAllBoardsButton"
         startIcon={<ArrowBackIosNewIcon />}
         onClick={onViewAllBoards}
         sx={{
@@ -48,14 +50,59 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
       >
         View All Boards
       </Button>
-      <h1>{currentBoard.title}</h1>
-      <SortingButtons options={sortOptions} setSortValue={setSortValue} setSortOrder={setSortOrder} sortValue={sortValue} sortOrder={sortOrder}/>
-      <CardContainer cardData={sortData(currentBoard.cards, sortOptions, sortValue, sortOrder)} />
-      <NewCardForm createNewCard={createNewCard} currentBoard={boardId} setSubmitStatus={setNewCardSubmitStatus} />
-      <dialog id="cardSubmitStatus">
-        {newCardSubmitStatus}
-        <button onClick={closeSubmitStatusDialog}>Close</button>
-      </dialog>
+      <Container
+        id="all-cards-container"
+        sx={{ mt: 2, backgroundColor: "#D4D1D1" }}
+      >
+        <Box
+          id="card-board-header"
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: "16px",
+          }}
+        >
+          <h1>Board: {currentBoard.title}</h1>
+          <section className="header-buttons">
+            <Button
+              id="newCardButton"
+              variant="contained"
+              endIcon={<AddIcon />}
+              onClick={openNewCardForm}
+              sx={{
+                backgroundColor: "#a389d4",
+                color: "#ffffff",
+                "&:hover": { backgroundColor: "#915fc1" },
+              }}
+            >
+              Create New Card
+            </Button>
+            <SortingButtons
+              options={sortOptions}
+              setSortValue={setSortValue}
+              setSortOrder={setSortOrder}
+              sortValue={sortValue}
+              sortOrder={sortOrder}
+            />
+          </section>
+        </Box>
+        <CardContainer
+          cardData={sortData(
+            currentBoard.cards,
+            sortOptions,
+            sortValue,
+            sortOrder
+          )}
+        />
+        <NewCardForm
+          createNewCard={createNewCard}
+          currentBoard={boardId}
+        />
+        <dialog id="cardSubmitErrorMsg">
+          <p>Card text must be between 1 and 40 characters</p>
+          <button onClick={() => document.getElementById('cardSubmitErrorMsg').close()}>Close</button>
+        </dialog>
+      </Container>
     </>
   );
 };

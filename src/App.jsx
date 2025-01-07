@@ -22,33 +22,37 @@ function App() {
     };
 
     return (
-        <>
-            <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Inspiration Board
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <Container maxWidth="xl" spacing={2}>
-                {selectedBoardId !== null ? (
-                    <Board 
-                        boardId={selectedBoardId}
-                        onViewAllBoards={handleViewAllBoards} 
-                        allBoards={boards}
-                        setBoards={setBoards}
-                    />
-                ) : (
-                    <BoardContainer
-                        boards={boards}
-                        setBoards={setBoards}
-                        onSelectBoard={handleSelectBoard}
-                    />
-                )}
-            </Container>
-        </>
-
-    )
+      <>
+        <AppBar id="header" position="static">
+          <Toolbar>
+            <Typography
+              id="site-title"
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1 }}
+            >
+              It&apos;s A Mood 😎
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Container maxWidth="xl" spacing={2}>
+          {selectedBoardId !== null ? (
+            <Board
+              boardId={selectedBoardId}
+              onViewAllBoards={handleViewAllBoards}
+              allBoards={boards}
+              setBoards={setBoards}
+            />
+          ) : (
+            <BoardContainer
+              boards={boards}
+              setBoards={setBoards}
+              onSelectBoard={handleSelectBoard}
+            />
+          )}
+        </Container>
+      </>
+    );
 }
 
 export default App

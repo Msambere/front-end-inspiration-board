@@ -1,0 +1,25 @@
+#viewAllBoardsButton {
+  margin-top: 16px;
+}
+
+#all-cards-container {
+  border-radius: 16px;
+  padding: 24px;
+}
+
+#card-board-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 16px 0;
+  /* margin-bottom: 10px; */
+}
+
+h1 {
+  font-family: 'Sour Gummy', cursive;
+  font-size: 2.5rem;
+  color: rgb(163, 127, 212);
+  font-weight: 550;
+ 
+}

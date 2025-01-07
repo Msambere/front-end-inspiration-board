@@ -1,7 +1,5 @@
 .cardContainer {
   height: auto;
-  border: 2px solid rosybrown;
-  border-radius: 8px;
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);

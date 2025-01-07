@@ -1,22 +1,33 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
 *{
   box-sizing: border-box;
   margin: 0;
   /* border: 1px dotted black; */
 }
 
-main{
-  width: 95%;
-  height: 95%;
-  border: 2px solid sandybrown;
-  border-radius: 8px;
-  display: grid;
-  grid-template-rows: 15% 1fr;
-}
-
-h1{
+#site-title{
   font-family: 'Sour Gummy', cursive;
   font-size: 3rem;
-  margin-top: 1rem;
-  margin-left: 1rem;
+  /* margin-top: 1rem;
+  margin-left: 1rem; */
+}
+
+#header{
+  width: 95%;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  
+}
+
+
+.header-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
