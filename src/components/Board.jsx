@@ -25,10 +25,16 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
   const sortOptions = {"Id":"id", "Likes":"likes", "Alphabetically":"text"};
 
 
-    const createNewCard = (board_id, newCardData) => {
+  const createNewCard = (board_id, newCardData) => {
     return newCardAPICall(board_id, newCardData).then(() => {
       boardDataAPICall().then((boards) => {setBoards(boards)
       });
+    });
+  };
+
+  const handleDeleteCard = () => {
+    boardDataAPICall().then((boards) => {
+      setBoards(boards);
     });
   };
 
@@ -93,6 +99,7 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
             sortValue,
             sortOrder
           )}
+          onDeleteCard={handleDeleteCard}
         />
         <NewCardForm
           createNewCard={createNewCard}

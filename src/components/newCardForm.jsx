@@ -58,7 +58,6 @@ const NewCardForm =({createNewCard, currentBoard}) => {
 NewCardForm.propTypes = {
     createNewCard: PropTypes.func.isRequired,
     currentBoard: PropTypes.number.isRequired,
-    setSubmitStatus: PropTypes.func.isRequired
 };
 
 export default NewCardForm;
