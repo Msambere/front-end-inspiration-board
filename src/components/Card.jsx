@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react';
 import { cardLikesAPICall, cardDeleteAPICall } from '../api/api';
-import { CardActionArea, CardActions, IconButton, Stack, Typography } from '@mui/material';
+import { CardActions, IconButton, Stack, Typography } from '@mui/material';
 import MCard from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-const Card = ({ id, text, likes: initialLikes, onDeleteCard }) => {
+const Card = ({ id, text, likes: initialLikes, updateBoardUseState }) => {
   const [likes, setLikes] = useState(initialLikes);
 
   const handleLikes = async () => {
@@ -15,6 +14,7 @@ const Card = ({ id, text, likes: initialLikes, onDeleteCard }) => {
       const responseAPI = await cardLikesAPICall(id);
       if (responseAPI && responseAPI.card) {
         setLikes(responseAPI.card.likes);
+        updateBoardUseState();
       }
     } catch (error) {
       console.log("Error:", error);
@@ -23,7 +23,7 @@ const Card = ({ id, text, likes: initialLikes, onDeleteCard }) => {
 
   const handleDeleteCard = () => {
     return cardDeleteAPICall(id).then(() => {
-      onDeleteCard();
+      updateBoardUseState();
       })
     };
 
@@ -64,7 +64,7 @@ Card.propTypes ={
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   likes: PropTypes.number.isRequired,
-  onDeleteCard: PropTypes.func.isRequired,
+  updateBoardUseState: PropTypes.func.isRequired,
 };
 
 export default Card;

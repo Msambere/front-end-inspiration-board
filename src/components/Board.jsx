@@ -32,7 +32,7 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
     });
   };
 
-  const handleDeleteCard = () => {
+  const updateBoardUseState = () => {
     boardDataAPICall().then((boards) => {
       setBoards(boards);
     });
@@ -99,7 +99,7 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
             sortValue,
             sortOrder
           )}
-          onDeleteCard={handleDeleteCard}
+          updateBoardUseState={updateBoardUseState}
         />
         <NewCardForm
           createNewCard={createNewCard}
