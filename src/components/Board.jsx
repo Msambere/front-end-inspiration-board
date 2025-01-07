@@ -22,7 +22,7 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
 
   const currentBoard = allBoards.find((board) => board.id === boardId);
 
-  const sortOptions = {"Id":"id", "Likes":"likes", "Alphabetically":"text"}; // Is there a way to extract this from data?
+  const sortOptions = {"Id":"id", "Likes":"likes", "Alphabetically":"text"};
 
 
     const createNewCard = (board_id, newCardData) => {

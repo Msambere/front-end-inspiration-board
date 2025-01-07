@@ -128,8 +128,6 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
                     </Grid>
                 </Grid>
             </Grid>
-
-      {/* New Board Form */}
       <NewBoardForm
         createNewBoard={(data) => {
           newBoardAPICall(data).then(() => {
