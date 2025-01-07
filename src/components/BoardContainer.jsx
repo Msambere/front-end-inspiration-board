@@ -78,16 +78,14 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards, loading }) => {
                                   cursor: "pointer",
                                   height: "300px",
                                   width: "300px",
-                                  "&:hover": {
-                                      backgroundColor: "#f5f5f5",
-                                  },
                                   display: "flex",
                                   flexDirection: "column",
                                   justifyContent: "center",
                                   alignItems: "center",
+                                  padding: "16px",
                               }}
                           >
-                              <CardActionArea onClick={() => onSelectBoard(board.id)}>
+                              <CardActionArea className="card-title" onClick={() => onSelectBoard(board.id)}>
                                   <CardContent>
                                       <Typography
                                           variant="h4"
