@@ -37,7 +37,10 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
   const [sortOrder, setSortOrder] = useState("asc");
 
   return (
-    <Container id="all-boards-container" sx={{ mt: 2, backgroundColor: "#D4D1D1" }} >
+    <Container
+      id="all-boards-container"
+      sx={{ mt: 2, backgroundColor: "#D4D1D1" }}
+    >
       <Box
         sx={{
           display: "flex",
@@ -66,68 +69,75 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
         />
       </Box>
 
-            <Grid container spacing={3} sx={{ padding: 2 }}>
-                <Grid xs={12}>
-                    <Grid container spacing={3} justifyContent="center">
-                        {sortData(boards, sortOptions, sortValue, sortOrder).map((board, index) => (
-                            <Grid xs={12} sm={6} md={4} key={index}>
-                                <Card
-                                    variant="outlined"
-                                    sx={{
-                                        borderRadius: "16px",
-                                        cursor: "pointer",
-                                        height: "200px",
-                                        "&:hover": {
-                                            backgroundColor: "#f5f5f5",
-                                        },
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <CardActionArea onClick={() => onSelectBoard(board.id)}>
-                                        <CardContent>
-                                            <Typography
-                                                variant="h4"
-                                                component="div"
-                                                sx={{ fontWeight: "bold", textAlign: "center" }}
-                                            >
-                                                {board.title}
-                                            </Typography>
-                                            <Typography
-                                                variant="subtitle1"
-                                                component="div"
-                                                sx={{ textAlign: "center", color: "gray" }}
-                                            >
-                                                Owner: {board.owner ?? "no owner"}
-                                            </Typography>
-                                            <Typography
-                                                variant="subtitle2"
-                                                component="div"
-                                                sx={{ textAlign: "center", color: "gray" }}
-                                            >
-                                                Cards: {board.cards.length}
-                                            </Typography>
-                                        </CardContent>
-                                    </CardActionArea>
-                                    <CardActions>
-                                        <Stack direction="row" spacing={1}>
-                                        <IconButton aria-label="delete" onClick={()=> {
-                                            deleteBoardAPICall(board.id).then(() => {
-                                                boardDataAPICall().then(newBoards => setBoards(newBoards))
-                                            });
-                                        }}>
-                                            <DeleteIcon />
-                                        </IconButton>
-                                        </Stack>
-                                    </CardActions>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
+      <Grid container spacing={3} sx={{ padding: 2 }}>
+        <Grid xs={12}>
+          <Grid container spacing={3} justifyContent="center">
+            {sortData(boards, sortOptions, sortValue, sortOrder).map(
+              (board, index) => (
+                <Grid xs={12} sm={6} md={4} key={index}>
+                  <Card
+                    variant="outlined"
+                    sx={{
+                      borderRadius: "16px",
+                      cursor: "pointer",
+                      height: "200px",
+                      "&:hover": {
+                        backgroundColor: "#f5f5f5",
+                      },
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <CardActionArea onClick={() => onSelectBoard(board.id)}>
+                      <CardContent>
+                        <Typography
+                          variant="h4"
+                          component="div"
+                          sx={{ fontWeight: "bold", textAlign: "center" }}
+                        >
+                          {board.title}
+                        </Typography>
+                        <Typography
+                          variant="subtitle1"
+                          component="div"
+                          sx={{ textAlign: "center", color: "gray" }}
+                        >
+                          Owner: {board.owner ?? "no owner"}
+                        </Typography>
+                        <Typography
+                          variant="subtitle2"
+                          component="div"
+                          sx={{ textAlign: "center", color: "gray" }}
+                        >
+                          Cards: {board.cards.length}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                    <CardActions>
+                      <Stack direction="row" spacing={1}>
+                        <IconButton
+                          aria-label="delete"
+                          onClick={() => {
+                            deleteBoardAPICall(board.id).then(() => {
+                              boardDataAPICall().then((newBoards) =>
+                                setBoards(newBoards)
+                              );
+                            });
+                          }}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Stack>
+                    </CardActions>
+                  </Card>
                 </Grid>
-            </Grid>
+              )
+            )}
+          </Grid>
+        </Grid>
+      </Grid>
       <NewBoardForm
         createNewBoard={(data) => {
           newBoardAPICall(data).then(() => {
@@ -139,6 +149,18 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
         isOpen={openCreateBoard}
         onClose={() => setOpenCreateBoard(false)}
       />
+      <dialog id="boardSubmitErrorMsg">
+        <section className="dialog-content">
+          <p>Board must have a title and owner</p>
+          <button
+            onClick={() =>
+              document.getElementById("boardSubmitErrorMsg").close()
+            }
+          >
+            Close
+          </button>
+        </section>
+      </dialog>
     </Container>
   );
 };

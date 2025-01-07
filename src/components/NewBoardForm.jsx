@@ -7,11 +7,19 @@ const NewBoardForm =({createNewBoard, isOpen, onClose}) => {
     const [boardTitle, setBoardTitle] = useState('');
     const [boardOwner, setBoardOwner] = useState('');
 
+    
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        createNewBoard({title: boardTitle, owner: boardOwner});
-        setBoardTitle('');
-        setBoardOwner('');
+        if (boardTitle.length < 1 || boardOwner.length < 1){
+            document.getElementById('boardSubmitErrorMsg').showModal();
+            return;
+        }else{
+            createNewBoard({title: boardTitle, owner: boardOwner});
+            setBoardTitle('');
+            setBoardOwner('');
+            onClose();
+        }
     }
 
     return(
@@ -20,14 +28,13 @@ const NewBoardForm =({createNewBoard, isOpen, onClose}) => {
                     component: 'form',
                     onSubmit: (event) => {
                         handleSubmit(event);
-                        onClose();
+                        // onClose();
                     },
                 }}>
             <DialogTitle>Create a new board</DialogTitle>
             <DialogContent>
                 <TextField
                     autoFocus
-                    required
                     margin="dense"
                     id="boardTitle"
                     name="boardTitle"
@@ -41,7 +48,6 @@ const NewBoardForm =({createNewBoard, isOpen, onClose}) => {
                 />
                 <TextField
                     autoFocus
-                    required
                     margin="dense"
                     id="boardOwner"
                     name="boardOwner"
