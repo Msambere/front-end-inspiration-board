@@ -99,8 +99,10 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
           currentBoard={boardId}
         />
         <dialog id="cardSubmitErrorMsg">
-          <p>Card text must be between 1 and 40 characters</p>
-          <button onClick={() => document.getElementById('cardSubmitErrorMsg').close()}>Close</button>
+          <section className="dialog-content">
+            <p>Card text must be between 1 and 40 characters</p>
+            <button onClick={() => document.getElementById('cardSubmitErrorMsg').close()}>Close</button>
+          </section>
         </dialog>
       </Container>
     </>
