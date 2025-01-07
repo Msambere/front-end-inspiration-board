@@ -1,13 +1,6 @@
 import Card from "./Card";
 import './CardContainer.css';
 import PropTypes from 'prop-types';
-import { Button } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-
-// const openNewCardForm = () => {
-//   const newCardForm = document.getElementById('newCardForm');
-//   newCardForm.showModal();
-// };
 
 const CardContainer = ({ cardData, onDeleteCard }) => {
 
@@ -28,18 +21,6 @@ const CardContainer = ({ cardData, onDeleteCard }) => {
 
       <section className="cardContainer">
           {cards}
-          {/* <Button
-            id="newCardButton"
-            variant="contained"
-            endIcon={<AddIcon />}
-            onClick={openNewCardForm}
-            sx={{
-                backgroundColor: "#a389d4",
-                color: "#ffffff",
-                "&:hover": { backgroundColor: "#915fc1" },
-            }}>
-          Create New Card
-          </Button> */}
       </section>
     </>
   )
@@ -52,10 +33,6 @@ CardContainer.propTypes = {
         likes: PropTypes.number.isRequired
     })).isRequired,
     onDeleteCard: PropTypes.func.isRequired,
-    // sortValue: PropTypes.string.isRequired,
-    // sortOrder: PropTypes.string.isRequired
-    //     likes: PropTypes.number.isRequired,
-    // })).isRequired
 };
 
 
