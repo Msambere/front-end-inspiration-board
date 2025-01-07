@@ -5,11 +5,20 @@ import './newCardForm.css';
 const NewCardForm =({createNewCard, currentBoard}) => {
     const [cardText, setCardText] = useState('');
 
+    const validateInput = (event) => {
+        if (event.target.value.length > 40){
+            document.getElementById('cardSubmitErrorMsg').showModal();
+            setCardText(event.target.value.slice(0, 40));
+        }else {
+            setCardText(event.target.value);
+        }
+    };
+
     const closeForm = () =>{
         setCardText("");
         const newCardForm = document.getElementById("newCardForm");
         newCardForm.close();
-    }
+    };
 
 
     const handleSubmit = (event) => {
@@ -18,10 +27,10 @@ const NewCardForm =({createNewCard, currentBoard}) => {
             document.getElementById('cardSubmitErrorMsg').showModal();
         }else{
             createNewCard(currentBoard, {text: cardText});
+            setCardText('');
+            closeForm();
         }
-        setCardText('');
-        closeForm();
-    }
+    };
 
 
     return (
@@ -32,9 +41,11 @@ const NewCardForm =({createNewCard, currentBoard}) => {
             <input
             type="text"
             name="card-text"
+            minLength={1}
+            maxLength={41}
             placeholder="Write your card text here"
             value={cardText}
-            onChange={(event) => setCardText(event.target.value)}
+            onChange={(event) => validateInput(event)}
             />
             <div className="button-container">
             <input type="submit" name="Create new card" />
