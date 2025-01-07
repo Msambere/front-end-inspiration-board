@@ -16,7 +16,7 @@ function App() {
               setBoards(boards)
               setLoading(false);
               console.log("Delayed for 2 second.");
-            }, 2000);
+            }, 5000);
         });
     }, []);
 

@@ -65,7 +65,7 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards, loading }) => {
           sortOrder={sortOrder}
         />
       </Box>
-      { loading ? (<div>Loading...</div>) :
+      { loading ? (<div className="loading-msg">Loading Boards...</div>) :
       (<Grid id="board-grid" container spacing={3} sx={{ padding: 2 }}>
           <Grid xs={12}>
               <Grid container spacing={3} justifyContent="center">
