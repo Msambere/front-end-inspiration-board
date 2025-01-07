@@ -7,10 +7,14 @@ import Board from './components/Board.jsx'
 
 function App() {
     const [boards, setBoards] = useState([]);
-    const [selectedBoardId, setSelectedBoardId] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [selectedBoardId, setSelectedBoardId] = useState([]);
 
     useEffect(() => {
-        boardDataAPICall().then((boards) => {setBoards(boards)});
+        boardDataAPICall().then((boards) => {
+            setBoards(boards)
+            setLoading(false);
+        });
     }, []);
 
     const handleSelectBoard = (boardId) => {
@@ -21,6 +25,9 @@ function App() {
         setSelectedBoardId(null);
     };
 
+    if(loading) {
+        return <div>Loading...</div>;
+    }
     return (
       <>
         <AppBar id="header" position="static">

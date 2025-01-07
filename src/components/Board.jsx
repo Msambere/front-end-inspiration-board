@@ -20,7 +20,7 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
   const [sortOrder, setSortOrder] = useState("asc");
 
 
-  const currentBoard = allBoards.find((board) => board.id === boardId);
+  const currentBoard = allBoards?.find((board) => board.id === boardId);
 
   const sortOptions = {"Id":"id", "Likes":"likes", "Alphabetically":"text"};
 

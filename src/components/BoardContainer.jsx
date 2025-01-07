@@ -76,7 +76,8 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards }) => {
                                     sx={{
                                         borderRadius: "16px",
                                         cursor: "pointer",
-                                        height: "200px",
+                                        height: "300px",
+                                        width: "300px",
                                         "&:hover": {
                                             backgroundColor: "#f5f5f5",
                                         },
