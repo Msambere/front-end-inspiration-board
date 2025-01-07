@@ -7,10 +7,17 @@ import Board from './components/Board.jsx'
 
 function App() {
     const [boards, setBoards] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [selectedBoardId, setSelectedBoardId] = useState(null);
 
     useEffect(() => {
-        boardDataAPICall().then((boards) => {setBoards(boards)});
+        boardDataAPICall().then((boards) => {
+            setTimeout(() => {
+              setBoards(boards)
+              setLoading(false);
+              console.log("Delayed for 2 second.");
+            }, 5000);
+        });
     }, []);
 
     const handleSelectBoard = (boardId) => {
@@ -21,6 +28,9 @@ function App() {
         setSelectedBoardId(null);
     };
 
+    // if(loading) {
+    //     return <div>Loading...</div>;
+    // }
     return (
       <>
         <AppBar id="header" position="static">
@@ -48,6 +58,7 @@ function App() {
               boards={boards}
               setBoards={setBoards}
               onSelectBoard={handleSelectBoard}
+              loading={loading}
             />
           )}
         </Container>

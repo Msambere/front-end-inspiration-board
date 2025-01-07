@@ -1,9 +1,0 @@
-.cardContainer {
-  height: auto;
-
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
-  justify-items: center;
-  align-items: center;
-}
