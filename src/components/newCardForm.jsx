@@ -35,7 +35,7 @@ const NewCardForm =({createNewCard, currentBoard}) => {
 
     return (
         <dialog id="newCardForm" className="newCardForm">
-        <button className="cancel-btn" onClick={closeForm}>❌</button>
+        <button className="cancel-btn" onClick={closeForm}>✖️</button>
         <h2>Create a new card</h2>
         <form className="" onSubmit={handleSubmit}>
             <input
