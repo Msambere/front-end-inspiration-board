@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types'
-import './Card.css';
 import { useState } from 'react';
 import { cardLikesAPICall, cardDeleteAPICall } from '../api/api';
-import ClearIcon from '@mui/icons-material/Clear';
-import { Button } from '@mui/material';
+import { CardActionArea, CardActions, IconButton, Stack, Typography } from '@mui/material';
+import MCard from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import DeleteIcon from "@mui/icons-material/Delete";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const Card = ({ id, text, likes: initialLikes, onDeleteCard }) => {
   const [likes, setLikes] = useState(initialLikes);
@@ -26,20 +28,39 @@ const Card = ({ id, text, likes: initialLikes, onDeleteCard }) => {
     };
 
   return (
-    <div className="card">
-      <Button onClick={handleDeleteCard}>
-        <ClearIcon 
-        fontSize="small"
-        />
-      </Button>
-      <p className="cardText">{text}</p>
-      <button 
-        className="likeButton" 
-        onClick={handleLikes}
-        >
-        {likes}💖
-      </button>
-    </div>
+      <MCard
+          variant="outlined"
+          sx={{
+            borderRadius: "16px",
+            cursor: "pointer",
+              height: "300px",
+              width: "300px",
+            "&:hover": {
+              backgroundColor: "#f5f5f5",
+            },
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+      >
+        <CardActionArea onClick={() => onSelectBoard(board.id)}>
+          <CardContent>
+            <Typography component="h1" variant="h5" align={'center'}>{text}</Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Stack direction="row" spacing={3}>
+            <IconButton aria-label="delete" onClick={handleDeleteCard}>
+              <DeleteIcon />
+            </IconButton>
+            <IconButton aria-label="like" onClick={handleLikes} >
+              {likes}
+              <FavoriteIcon />
+            </IconButton>
+          </Stack>
+        </CardActions>
+      </MCard>
   );
 };
 

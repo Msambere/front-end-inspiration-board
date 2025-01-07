@@ -1,28 +1,18 @@
 import Card from "./Card";
-import './CardContainer.css';
 import PropTypes from 'prop-types';
-
+import Grid from "@mui/material/Grid2";
 const CardContainer = ({ cardData, onDeleteCard }) => {
-
-    const cards = cardData.map((card) => {
-        return (
-          <Card 
-            key={card.id} 
-            id={card.id} 
-            text={card.text} 
-            likes={card.likes} 
-            onDeleteCard={onDeleteCard}
-          />
-        )
-    });
-
-  return (
-    <>
-
-      <section className="cardContainer">
-          {cards}
-      </section>
-    </>
+  return (<Grid container spacing={3} sx={{ padding: 2 }}>
+              <Grid xs={12}>
+                  <Grid container spacing={3} justifyContent="center">
+                      {cardData.map((card, index) => (
+                          <Grid xs={12} sm={6} md={4} key={index}>
+                              <Card key={card.id} id={card.id} text={card.text} likes={card.likes} onDeleteCard={onDeleteCard}/>
+                          </Grid>
+                      ))}
+                  </Grid>
+              </Grid>
+          </Grid>
   )
 };
 
