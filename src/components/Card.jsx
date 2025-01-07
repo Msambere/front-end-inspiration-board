@@ -44,11 +44,7 @@ const Card = ({ id, text, likes: initialLikes, onDeleteCard }) => {
             alignItems: "center",
           }}
       >
-        <CardActionArea onClick={() => onSelectBoard(board.id)}>
-          <CardContent>
-            <Typography component="h1" variant="h5" align={'center'}>{text}</Typography>
-          </CardContent>
-        </CardActionArea>
+        <Typography component="h1" variant="h5" align={'center'}>{text}</Typography>
         <CardActions>
           <Stack direction="row" spacing={3}>
             <IconButton aria-label="delete" onClick={handleDeleteCard}>
