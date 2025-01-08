@@ -92,23 +92,33 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
             />
           </section>
         </Box>
-        <CardContainer
-          cardData={sortData(
-            currentBoard.cards,
-            sortOptions,
-            sortValue,
-            sortOrder
-          )}
-          updateBoardUseState={updateBoardUseState}
-        />
-        <NewCardForm
-          createNewCard={createNewCard}
-          currentBoard={boardId}
-        />
+        {currentBoard.cards.length === 0 ? (
+          <div className="no-cards-msg">
+            <h1> Ready for a fresh start? </h1>
+            <h1>✨ Create a new card! ✨</h1>
+          </div>
+        ) : (
+          <CardContainer
+            cardData={sortData(
+              currentBoard.cards,
+              sortOptions,
+              sortValue,
+              sortOrder
+            )}
+            updateBoardUseState={updateBoardUseState}
+          />
+        )}
+        <NewCardForm createNewCard={createNewCard} currentBoard={boardId} />
         <dialog id="cardSubmitErrorMsg">
           <section className="dialog-content">
             <p>Card text must be between 1 and 40 characters</p>
-            <button onClick={() => document.getElementById('cardSubmitErrorMsg').close()}>Close</button>
+            <button
+              onClick={() =>
+                document.getElementById("cardSubmitErrorMsg").close()
+              }
+            >
+              Close
+            </button>
           </section>
         </dialog>
       </Container>

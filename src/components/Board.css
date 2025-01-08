@@ -52,3 +52,23 @@ dialog {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border: none;
 }
+
+.no-cards-msg {
+  /* border: 2px solid white; */
+  background-color: white;
+  border-radius: 16px;
+  padding: 32px;
+  width: 80%;
+  justify-self: center;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-cards-msg h1 {
+  /* font-family: 'Roboto', 'Arial', sans-serif; */
+  font-weight: normal;
+  color: black;
+}

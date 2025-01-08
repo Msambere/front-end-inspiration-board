@@ -12,9 +12,11 @@ function App() {
 
     useEffect(() => {
         boardDataAPICall().then((boards) => {
+          setTimeout(() => {
             setBoards(boards)
             setLoading(false);
-        });
+        }, 3000);
+      })
     }, []);
 
     const handleSelectBoard = (boardId) => {
