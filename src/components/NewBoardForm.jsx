@@ -28,7 +28,6 @@ const NewBoardForm =({createNewBoard, isOpen, onClose}) => {
                     component: 'form',
                     onSubmit: (event) => {
                         handleSubmit(event);
-                        // onClose();
                     },
                 }}>
             <DialogTitle>Create a new board</DialogTitle>

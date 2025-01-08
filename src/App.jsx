@@ -12,11 +12,8 @@ function App() {
 
     useEffect(() => {
         boardDataAPICall().then((boards) => {
-            setTimeout(() => {
-              setBoards(boards)
-              setLoading(false);
-              console.log("Delayed for 2 second.");
-            }, 5000);
+            setBoards(boards)
+            setLoading(false);
         });
     }, []);
 
@@ -28,9 +25,6 @@ function App() {
         setSelectedBoardId(null);
     };
 
-    // if(loading) {
-    //     return <div>Loading...</div>;
-    // }
     return (
       <>
         <AppBar id="header" position="static">
