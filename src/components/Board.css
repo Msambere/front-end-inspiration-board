@@ -1,5 +1,5 @@
 #viewAllBoardsButton {
-  margin-top: 16px;
+  margin: 16px 0;
 }
 
 #all-cards-container {
@@ -71,4 +71,8 @@ dialog {
   /* font-family: 'Roboto', 'Arial', sans-serif; */
   font-weight: normal;
   color: black;
+}
+
+#newCardButton {
+  height: 75px;
 }

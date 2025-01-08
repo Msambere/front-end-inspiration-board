@@ -16,7 +16,7 @@ h2 {
 }
 
 form {
-  height: 60%;
+  height: 400px;
 
   display: flex;
   flex-direction: column;

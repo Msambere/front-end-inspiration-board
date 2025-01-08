@@ -44,7 +44,11 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
 
   return (
     <>
-      <Button
+      <Container
+        id="all-cards-container"
+        sx={{ mt: 2, backgroundColor: "#D4D1D1" }}
+      >
+        <Button
         id="viewAllBoardsButton"
         startIcon={<ArrowBackIosNewIcon />}
         onClick={onViewAllBoards}
@@ -56,10 +60,6 @@ const Board = ({ boardId, onViewAllBoards, allBoards, setBoards }) => {
       >
         View All Boards
       </Button>
-      <Container
-        id="all-cards-container"
-        sx={{ mt: 2, backgroundColor: "#D4D1D1" }}
-      >
         <Box
           id="card-board-header"
           sx={{
