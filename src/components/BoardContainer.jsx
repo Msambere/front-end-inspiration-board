@@ -70,7 +70,7 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards, loading }) => {
       </Box>
       { loading ? (<div className="loading-msg">
         <h1>Loading Boards...</h1>
-        <img className="loading-img" src="../public/loading.gif" alt="loading gif"/>
+        <img className="loading-img" src="loading.gif" alt="loading gif"/>
         </div>) :
       (<Grid id="board-grid" container spacing={3} sx={{ padding: 2 }}>
           <Grid xs={12}>
