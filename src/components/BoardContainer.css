@@ -37,3 +37,8 @@
   width: auto;
   max-height: 200px;
 }
+
+.no-boards-msg{
+  padding: 32px;
+  justify-self: center;
+}
