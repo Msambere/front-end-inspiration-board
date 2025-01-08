@@ -76,7 +76,6 @@ const BoardContainer = ({ boards, onSelectBoard, setBoards, loading }) => {
       ) : boards.length === 0 ? (
         <div className="no-boards-msg">
           <h1> Create a board and set the mood!</h1>
-          {/* <img className="loading-img" src="loading.gif" alt="loading gif" /> */}
         </div>
       ) : (
         <Grid id="board-grid" container spacing={3} sx={{ padding: 2 }}>
