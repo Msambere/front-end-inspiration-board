@@ -12,10 +12,8 @@ function App() {
 
     useEffect(() => {
         boardDataAPICall().then((boards) => {
-          setTimeout(() => {
-            setBoards(boards)
-            setLoading(false);
-        }, 3000);
+          setBoards(boards)
+          setLoading(false);
       })
     }, []);
 
